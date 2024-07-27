@@ -1,10 +1,9 @@
-import { users } from "../dummyData/data.js";
 import User from "../models/users.js";
 import bcrypt from "bcryptjs"
 
 const userResolver = {
     Mutation: {
-        signUp: async (_, __, { input }, context) => {
+        signUp: async (_, { input }, context) => {
             try {
                 const { username, name, password, gender } = input
                 if (!username || !name || !password || !gender) {

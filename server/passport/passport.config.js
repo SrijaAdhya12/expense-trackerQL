@@ -16,7 +16,7 @@ export const configurePassport = async () => {
             const user = await User.findbyId(id)
             done(null, user)
         } catch (error) {
-            done(err)
+            done(error)
         }
     })
 
