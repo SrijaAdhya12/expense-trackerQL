@@ -14,8 +14,10 @@ const SignUpPage = () => {
         gender: ''
     })
 
-    const [signup, {loading, error }] = useMutation(SIGN_UP)
-
+    const [signup, { loading, error }] = useMutation(SIGN_UP, {
+        refetchQueries: ['GetAuthenticatedUser']
+    })
+ 
     const handleChange = (e) => {
         const { name, value, type } = e.target
 
@@ -34,6 +36,7 @@ const SignUpPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        if (!signUpData.name || !signUpData.username || !signUpData.password) return toast.error('Please fill in all fields')
         try {
             await signup({
                 variables: {

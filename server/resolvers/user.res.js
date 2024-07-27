@@ -39,21 +39,23 @@ const userResolver = {
         login: async (_, { input }, context) => {
             try {
                 const { username, password } = input
+                if (!username || !password) throw new Error('All fields are required')
                 const { user } = await context.authenticate('graphql-local', { username, password })
+
                 await context.login(user)
                 return user
-            } catch (error) {
-                console.error('Error in login', error)
+            } catch (err) {
+                console.error('Error in login:', err)
                 throw new Error(err.message || 'Internal server error')
             }
         },
         logout: async (_, __, context) => {
             try {
                 await context.logout()
-                req.session.destroy((error) => {
+                context.req.session.destroy((error) => {
                     if (error) throw error
                 })
-                res.clearCookie('connect.id')
+                context.res.clearCookie('connect.id')
                 return { message: 'Logged out successfully' }
             } catch (error) {
                 console.error('Error in logout', error)
@@ -62,24 +64,24 @@ const userResolver = {
         }
     },
     Query: {
-		authUser: async (_, __, context) => {
-			try {
-				const user = await context.getUser()
-				return user
-			} catch (error) {
-				console.error('Error in AuthUser', error)
+        authUser: async (_, __, context) => {
+            try {
+                const user = await context.getUser()
+                return user
+            } catch (error) {
+                console.error('Error in AuthUser', error)
                 throw new Error(err.message || 'Internal server error')
-			}
-		},
-		user: async (_, { userId }) => {
-			try {
-				const user = await User.findById(userId)
-				return user
-			} catch (error) {
-				console.error('Error in user query', error)
+            }
+        },
+        user: async (_, { userId }) => {
+            try {
+                const user = await User.findById(userId)
+                return user
+            } catch (error) {
+                console.error('Error in user query', error)
                 throw new Error(err.message || 'Error getting user')
-			}
-		}
+            }
+        }
     }
 }
 
