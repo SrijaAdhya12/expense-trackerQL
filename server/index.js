@@ -14,9 +14,11 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import mergedResolvers from './resolvers/index.js'
 import mergedTypeDefs from './typeDefs/index.js'
 import { connectDB } from './db/connectDB.js'
+import { configurePassport } from './passport/passport.config.js'
 import { connect } from 'http2'
 
 dotenv.config()
+configurePassport()
 
 const app = express()
 const httpServer = http.createServer(app)
