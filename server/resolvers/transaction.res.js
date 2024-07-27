@@ -33,8 +33,8 @@ const transactionResolver = {
                 })
                 await newTransaction.save()
                 return newTransaction
-            } catch (error) {
-                console.error('Error creating transaction', error)
+            } catch (err) {
+                console.error('Error creating transaction:', err)
                 throw new Error('Error creating transaction')
             }
         },
@@ -51,10 +51,10 @@ const transactionResolver = {
         },
         deleteTransaction: async (_, { transactionId }) => {
             try {
-                const deleteTransaction = await Transaction.findByIdAndDelete(transactionId)
-                return deleteTransaction
-            } catch (error) {
-                console.error('Error deleting transaction', error)
+                const deletedTransaction = await Transaction.findByIdAndDelete(transactionId)
+                return deletedTransaction
+            } catch (err) {
+                console.error('Error deleting transaction:', err)
                 throw new Error('Error deleting transaction')
             }
         }
