@@ -15,7 +15,10 @@ import mergedResolvers from './resolvers/index.js'
 import mergedTypeDefs from './typeDefs/index.js'
 import { connectDB } from './db/connectDB.js'
 import { configurePassport } from './passport/passport.config.js'
+import path from 'path'
 
+
+const __dirname = path.resolve()
 dotenv.config()
 configurePassport()
 
@@ -68,6 +71,12 @@ app.use(
         context: async ({ req, res }) => buildContext({ req, res })
     })
 )
+
+
+app.use(express.static(path.join(__dirname, "client/dist")))
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client/dist", "index.html"))
+})
 
 // Modified server startup
 await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve))
