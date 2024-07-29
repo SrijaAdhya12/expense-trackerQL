@@ -1,9 +1,9 @@
-import React from 'react'
+import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
-import { GridBackground } from './components/index.js'
+import { GridBackground } from './components'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 
 const client = new ApolloClient({
@@ -13,7 +13,7 @@ const client = new ApolloClient({
 })
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
+    <StrictMode>
         <BrowserRouter>
             <GridBackground>
                 <ApolloProvider client={client}>
@@ -21,5 +21,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 </ApolloProvider>
             </GridBackground>
         </BrowserRouter>
-    </React.StrictMode>
+    </StrictMode>
 )
