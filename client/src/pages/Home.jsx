@@ -27,18 +27,15 @@ import { GET_AUTHENTICATED_USER } from '../graphql/queries/user.query'
 //     ]
 // }
 
-
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 const HomePage = () => {
-
     const { data } = useQuery(GET_TRANSACTION_STATISTICS)
-    const { data:authUserData } = useQuery(GET_AUTHENTICATED_USER)
-     const [logout, { loading, client }] = useMutation(LOGOUT, {
-         refetchQueries: ['GetAuthenticatedUser']
-     })
+    const { data: authUserData } = useQuery(GET_AUTHENTICATED_USER)
+    const [logout, { loading, client }] = useMutation(LOGOUT, {
+        refetchQueries: ['GetAuthenticatedUser']
+    })
 
-    
     const [chartData, setChartData] = useState({
         labels: [],
         datasets: [
@@ -62,16 +59,16 @@ const HomePage = () => {
             const backgroundColors = []
             const borderColors = []
             categories.forEach((category) => {
-               if (category === 'saving') {
-                   backgroundColors.push('rgba(75, 192, 192)')
-                   borderColors.push('rgba(75, 192, 192)')
-               } else if (category === 'expense') {
-                   backgroundColors.push('rgba(255, 99, 132)')
-                   borderColors.push('rgba(255, 99, 132)')
-               } else if (category === 'investment') {
-                   backgroundColors.push('rgba(54, 162, 235)')
-                   borderColors.push('rgba(54, 162, 235)')
-               } 
+                if (category === 'saving') {
+                    backgroundColors.push('rgba(75, 192, 192)')
+                    borderColors.push('rgba(75, 192, 192)')
+                } else if (category === 'expense') {
+                    backgroundColors.push('rgba(255, 99, 132)')
+                    borderColors.push('rgba(255, 99, 132)')
+                } else if (category === 'investment') {
+                    backgroundColors.push('rgba(54, 162, 235)')
+                    borderColors.push('rgba(54, 162, 235)')
+                }
             })
 
             setChartData((prev) => ({
@@ -87,13 +84,13 @@ const HomePage = () => {
             }))
         }
     }, [data])
-    
+
     const handleLogout = async () => {
         try {
             await logout()
             client.resetStore()
         } catch (error) {
-            console.error("Error logging out:", error)
+            console.error('Error logging out:', error)
             toast.error(error.message)
         }
     }

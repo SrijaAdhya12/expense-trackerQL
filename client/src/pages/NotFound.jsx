@@ -1,4 +1,4 @@
-import { NotFoundImg } from "../assets/index"
+import { NotFoundImg } from '../assets/index'
 
 const NotFound = () => {
     return (

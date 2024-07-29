@@ -17,7 +17,6 @@ import { connectDB } from './db/connectDB.js'
 import { configurePassport } from './passport/passport.config.js'
 import path from 'path'
 
-
 const __dirname = path.resolve()
 dotenv.config()
 configurePassport()
@@ -72,10 +71,9 @@ app.use(
     })
 )
 
-
-app.use(express.static(path.join(__dirname, "client/dist")))
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client/dist", "index.html"))
+app.use(express.static(path.join(__dirname, 'client/dist')))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/dist', 'index.html'))
 })
 
 // Modified server startup

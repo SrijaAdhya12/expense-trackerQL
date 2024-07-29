@@ -8,7 +8,7 @@ import { Home, Login, SignUp, Transaction, NotFound } from './pages'
 const App = () => {
     const { loading, data, error } = useQuery(GET_AUTHENTICATED_USER)
 
-	if (loading) return null;
+    if (loading) return null
 
     return (
         <>
@@ -17,10 +17,7 @@ const App = () => {
                 <Route path="/" element={data.authUser ? <Home /> : <Navigate to="/login" />} />
                 <Route path="/login" element={!data.authUser ? <Login /> : <Navigate to="/" />} />
                 <Route path="/signup" element={!data.authUser ? <SignUp /> : <Navigate to="/" />} />
-                <Route
-                    path="/transaction/:id"
-                    element={data.authUser ? <Transaction /> : <Navigate to="/login" />}
-                />
+                <Route path="/transaction/:id" element={data.authUser ? <Transaction /> : <Navigate to="/login" />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
             <Toaster />

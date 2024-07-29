@@ -1,5 +1,5 @@
-import User from "../models/users.js";
-import bcrypt from "bcryptjs"
+import User from '../models/users.js'
+import bcrypt from 'bcryptjs'
 
 const userResolver = {
     Mutation: {
@@ -85,4 +85,4 @@ const userResolver = {
     }
 }
 
-export default userResolver;
+export default userResolver

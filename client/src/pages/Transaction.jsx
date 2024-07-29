@@ -15,7 +15,7 @@ const Transaction = () => {
     console.log('Transaction', data)
 
     const [updateTransaction, { loading: loadingUpdate }] = useMutation(UPDATE_TRANSACTION, {
-        refetchQueries: ["GetTransactions" , "GetTransactionStatistics"]
+        refetchQueries: ['GetTransactions', 'GetTransactionStatistics']
     })
 
     const [formData, setFormData] = useState({
