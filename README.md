@@ -73,7 +73,10 @@ $> npm start   # run the backEnd
 
 ## Preview
 
-![Snapshot](.github/preview.png)
+<!--![Snapshot](.github/preview.png)-->
+
+![Expense-trackerQL](https://github.com/user-attachments/assets/dcb91022-9092-4972-8cc7-436ddbd17960)
+
 
 ![line]
 
