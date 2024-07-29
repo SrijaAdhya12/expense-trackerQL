@@ -46,7 +46,7 @@ $> npm run dev # run the frontend
 ```
   3. Run the following commands for running server (backEnd)
 ```sh
-$> cd client
+$> cd server
 $> npm i       # install all packages
 $> npm start   # run the backEnd
 ```
