@@ -1,16 +1,16 @@
-    updated on: 27th July 2024, Saturday
+    updated on: 29th July 2024, Monday
 
 <div align=center>
     <a href="https://github.com/warmachine028/github-super-starter-kit">
-        <img width="200" src="https://img.icons8.com/?size=1000&id=46874" alt="github-super-starter-kit">
+        <img width="200" src="https://cdn-icons-png.flaticon.com/512/6289/6289296.png" alt="github-super-starter-kit">
     </a>
-    <p style="font-family: roboto, calibri; font-size:12pt; font-style:italic"> A good one liner description here </p>
+    <p style="font-family: roboto, calibri; font-size:12pt; font-style:italic"> A web app based on MERN and GraphQL to keep track on daily expense, investment and saving </p>
     <a src="https://github.com/warmachine028/github-super-starter-kit/forks">
         <img alt="GitHub forks" src="https://img.shields.io/github/forks/warmachine028/github-super-starter-kit">
     </a>
 </div>
 
-# [Github Super Starter Kit](https://github.com/warmachine028/github-super-starter-kit)
+# [Expense-TrackerQL](https://github.com/warmachine028/github-super-starter-kit)
 
 ![line]
 
@@ -27,34 +27,47 @@
 
 ## Introduction
 
-- Go to [`.github/workflows`](.github/workflows) and for each workflow replace *github-super-starter-kit* with *repo-name*.
-- Press `ctrl+shift+F` and `github-super-starter-kit` then replace all with your `repo-name`.
-- To enable the workflows, go to `settings/actions` in your repo and change "Workflow Permissions" from "Read repository contents ..." to "Read and Write ..."
-- To configure automatic preview generation, replace [`url`](.github/take-snapshot.mjs#L5) with your hosted URL.
-- Configure the [CodeQL Analysis](.github/workflows/codeql-analysis.yml) according to your tech stack/language.
-- Feel free to add your own sections in this readme according to your requirements, make sure to link those sections in the above [**Table of Contents**](#table-of-contents)
+- A web app based on MERN and GraphQL to keep track on daily expense, investment and saving.
+- It gives a clear graphical overview on this factors.
+- Provides seemless and interactive UI.
   
 ![line]
 
 ## Developement
 
-- Steps used for development of this project
-- Build processes
-- CI/CD commands
-- Docker commands
+
+  1. Download NodeJS >18.0.1
+  2. Run the following commands for running client (frontEnd)
+  3. set up `.env` with the help of `.env.example` file in both client and server
+```sh
+$> cd client
+$> npm i       # install all packages
+$> npm run dev # run the frontend
+```
+  3. Run the following commands for running server (backEnd)
+```sh
+$> cd client
+$> npm i       # install all packages
+$> npm start   # run the backEnd
+```
 
 ![line]
 
 ## Tech Stack Used
 
-- GitHub
-- Markdown
-- GitHub Actions
-- Dependabot
-- Yaml
+- React js
+- React Router
+- Tailwind 
 - Java Script
+- Node js
+- Mongo db
+- Express js
+- GraphQL
+- Apollo GraphQl 
+- Github
+- Github Actions
 
-![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) ![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white) ![Dependabot](https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white) ![YAML](https://img.shields.io/badge/yaml-%23ffffff.svg?style=for-the-badge&logo=yaml&logoColor=151515) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=blue) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![Node JS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) ![Express](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge) ![GraphQL](https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white) ![Apollo-GraphQL](https://img.shields.io/badge/-ApolloGraphQL-311C87?style=for-the-badge&logo=apollo-graphql)  ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white) 
 
 ![line]
 
@@ -67,8 +80,8 @@
 ## Best Contributors
 
 <div align="center">
-    <a  href="https://github.com/warmachine028/github-super-starter-kit/graphs/contributors">
-        <img src="https://contrib.rocks/image?repo=warmachine028/github-super-starter-kit" alt="contributors" />
+    <a  href="https://github.com/SrijaAdhya12/expense-trackerQL/contributors">
+        <img src="https://contrib.rocks/image?repo=SrijaAdhya12/expense-trackerQL" alt="contributors" />
     </a>
 </div>
 
@@ -78,7 +91,7 @@
 
 - See [LICENSE]
 
-**Pritam, 2024**
+**Srija, 2024**
 
 ![line]
 
@@ -88,4 +101,4 @@
 [line]: https://user-images.githubusercontent.com/75939390/137615281-3a875960-92cc-407f-97fe-fd2319bdb252.png
 [License]: https://github.com/warmachine028/github-super-starter-kit/blob/main/LICENSE
 
-<!-- 27/07/24 -->
+<!-- 29/07/24 -->
