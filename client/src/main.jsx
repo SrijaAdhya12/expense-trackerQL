@@ -7,7 +7,7 @@ import { GridBackground } from './components'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 
 const client = new ApolloClient({
-    uri: import.meta.env.VITE_SERVER,
+    uri: import.meta.env.VITE_MODE_ENV === "development" ?import.meta.env.VITE_SERVER : "/graphql",
     cache: new InMemoryCache(),
     credentials: 'include'
 })
