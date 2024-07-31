@@ -14,7 +14,7 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import mergedResolvers from './resolvers/index.js'
 import mergedTypeDefs from './typeDefs/index.js'
 import { connectDB } from './db/connectDB.js'
-import { configurePassport } from './passport/passport.config.js'
+import { configurePassport } from './passport/passport.js'
 import path from 'path'
 
 const __dirname = path.resolve()
@@ -70,6 +70,7 @@ app.use(
     })
 )
 
+// npm run build to build client
 app.use(express.static(path.join(__dirname, 'client/dist')))
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client/dist', 'index.html'))
@@ -79,4 +80,4 @@ app.get('*', (req, res) => {
 await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve))
 await connectDB()
 
-console.log(`🚀 Server ready at port ${PORT}`)
+console.log(`🚀 Server ready at port ${process.env.PORT}`)
