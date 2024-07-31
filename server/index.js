@@ -78,7 +78,7 @@ app.get("*", (req, res) => {
 })
 
 // Modified server startup
-await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve))
+await new Promise((resolve) => httpServer.listen({ port: process.env.PORT }, resolve))
 await connectDB()
 
-console.log(`🚀 Server ready at port ${4000}`)
+console.log(`🚀 Server ready at port ${process.env.PORT}`)
