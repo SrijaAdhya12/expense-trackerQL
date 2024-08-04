@@ -54,10 +54,8 @@ const server = new ApolloServer({
 // Ensure we wait for our server to start
 await server.start()
 
-
-
 app.use(
-    '/',
+    '/graphql',
     cors({
         origin: 'https://expense-tracker-ql-c266.vercel.app',
         credentials: true
@@ -68,16 +66,10 @@ app.use(
     })
 )
 
+app.get('/', (_, res) => res.send('Welcome to TypeScript Server'))
 
 // Modified server startup
 await new Promise((resolve) => httpServer.listen({ port: process.env.PORT }, resolve))
 await connectDB()
 
 console.log(`🚀 Server ready at port ${process.env.PORT}`)
-
-
-
-
-
-
-
