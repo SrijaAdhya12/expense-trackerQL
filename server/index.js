@@ -55,14 +55,15 @@ const server = new ApolloServer({
 await server.start()
 
 app.use(
-    '/graphql',
     cors({
-        origin: 'https://expense-tracker-ql-c266.vercel.app',
+        origin: 'https://expense-tracker-ql-c266.vercel.app', 
         credentials: true
-    }),
+    })
+)
+
+app.use(
+    '/graphql',
     express.json(),
-    // expressMiddleware accepts the same arguments:
-    // an Apollo Server instance and optional configuration options
     expressMiddleware(server, {
         context: async ({ req, res }) => buildContext({ req, res })
     })
