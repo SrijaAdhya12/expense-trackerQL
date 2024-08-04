@@ -54,22 +54,20 @@ const server = new ApolloServer({
 // Ensure we wait for our server to start
 await server.start()
 
-app.use(
-    cors({
-        origin: 'https://expense-tracker-ql-c266.vercel.app', 
-        credentials: true
-    })
-)
+
 
 app.use(
-    '/graphql',
+    '/',
+    cors({
+        origin: 'https://expense-tracker-ql-c266.vercel.app',
+        credentials: true
+    }),
     express.json(),
     expressMiddleware(server, {
         context: async ({ req, res }) => buildContext({ req, res })
     })
 )
 
-app.get('/', (_, res) => res.send('Welcome to Expense App Server'))
 
 // Modified server startup
 await new Promise((resolve) => httpServer.listen({ port: process.env.PORT }, resolve))
