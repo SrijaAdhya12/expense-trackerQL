@@ -59,7 +59,7 @@ const userResolver = {
                 return { message: 'Logged out successfully' }
             } catch (error) {
                 console.error('Error in logout', error)
-                throw new Error(err.message || 'Internal server error')
+                throw new Error(error.message || 'Internal server error')
             }
         }
     },
@@ -70,7 +70,7 @@ const userResolver = {
                 return user
             } catch (error) {
                 console.error('Error in AuthUser', error)
-                throw new Error(err.message || 'Internal server error')
+                throw new Error(error.message || 'Internal server error')
             }
         },
         user: async (_, { userId }) => {
@@ -79,7 +79,7 @@ const userResolver = {
                 return user
             } catch (error) {
                 console.error('Error in user query', error)
-                throw new Error(err.message || 'Error getting user')
+                throw new Error(error.message || 'Error getting user')
             }
         }
     }
