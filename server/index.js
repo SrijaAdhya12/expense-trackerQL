@@ -57,7 +57,7 @@ await server.start()
 app.use(
     '/graphql',
     cors({
-        origin: 'http://localhost:3000',
+        origin: 'https://expense-tracker-ql-c266.vercel.app/',
         credentials: true
     }),
     express.json(),
@@ -75,3 +75,10 @@ await new Promise((resolve) => httpServer.listen({ port: process.env.PORT }, res
 await connectDB()
 
 console.log(`🚀 Server ready at port ${process.env.PORT}`)
+
+
+
+
+
+
+
