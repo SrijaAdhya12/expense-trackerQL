@@ -33,7 +33,7 @@ const userResolver = {
                 return newUser
             } catch (error) {
                 console.error('Error in Sign up', error)
-                throw new Error(err.message || 'Internal server error')
+                throw new Error(error.message || 'Internal server error')
             }
         },
         login: async (_, { input }, context) => {
