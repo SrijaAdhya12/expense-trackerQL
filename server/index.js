@@ -15,12 +15,9 @@ import mergedResolvers from './resolvers/index.js'
 import mergedTypeDefs from './typeDefs/index.js'
 import { connectDB } from './db/connectDB.js'
 import { configurePassport } from './passport/passport.js'
-import path from 'path'
 
 dotenv.config()
 configurePassport()
-
-const __dirname = path.resolve()
 
 const app = express()
 const httpServer = http.createServer(app)
@@ -71,11 +68,7 @@ app.use(
     })
 )
 
-app.use(express.static(path.join(__dirname, "client/dist")))
-
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname , "client/dist" , "index.html"))
-})
+app.get('/', (_, res) => res.send('Welcome to Expense App Server'))
 
 // Modified server startup
 await new Promise((resolve) => httpServer.listen({ port: process.env.PORT }, resolve))
