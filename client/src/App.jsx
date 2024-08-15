@@ -9,6 +9,7 @@ const App = () => {
     const { loading, data, error } = useQuery(GET_AUTHENTICATED_USER)
 
     if (loading) return null
+    console.log('Auth User Data:', data?.authUser)
 
     return (
         <>
