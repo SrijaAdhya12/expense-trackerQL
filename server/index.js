@@ -57,7 +57,7 @@ await server.start()
 app.use(
     '/graphql',
     cors({
-        origin: 'https://expense-tracker-ql-c266.vercel.app',
+        origin: '*',
         credentials: true
     }),
     express.json(),
