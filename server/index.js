@@ -28,7 +28,7 @@ const store = new MongoDBstore({
     collection: 'session'
 })
 
-store.on('error', (err) => console.log(err))
+store.on('error', (err) => console.error(err))
 
 app.use(
     session({
@@ -37,8 +37,10 @@ app.use(
         saveUninitialized: false,
         cookie: {
             maxAge: 1000 * 60 * 60 * 24 * 7,
+            httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+            proxy: process.env.NODE_ENV === 'production'
         },
         store
     }),
