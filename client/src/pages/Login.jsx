@@ -12,7 +12,10 @@ const LoginPage = () => {
     })
 
     const [login, { loading }] = useMutation(LOGIN, {
-        refetchQueries: ['GetAuthenticatedUser']
+        refetchQueries: ['GetAuthenticatedUser'],
+        onCompleted: () => {
+            navigate('/')
+        }
     })
 
     const handleChange = (e) => {
