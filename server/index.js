@@ -71,7 +71,7 @@ app.use(
     })
 )
 
-app.get('/', (_, res) => res.send('Welcome to TypeScript Server'))
+app.get('/', (_, res) => res.send('Welcome to ApolloServer'))
 
 // Modified server startup
 await new Promise((resolve) => httpServer.listen({ port: process.env.PORT }, resolve))
