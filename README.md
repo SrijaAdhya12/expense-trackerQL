@@ -6,7 +6,7 @@
     </a>
     <p style="font-family: roboto, calibri; font-size:12pt; font-style:italic"> A web app based on MERN and GraphQL to keep track on daily expense, investment and saving </p>
     <a src="https://github.com/SrijaAdhya12/expense-trackerQL-kit/forks">
-        <img alt="GitHub forks" src="https://img.shields.io/github/forks/warmachine028/SrijaAdhya12/expense-trackerQL-kit">
+        <img alt="GitHub forks" src="https://img.shields.io/github/forks/SrijaAdhya12/expense-trackerQL">
     </a>
 </div>
 
