@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import InputField from '../components/InputField'
 import { useMutation } from '@apollo/client'
@@ -10,6 +10,8 @@ const LoginPage = () => {
         username: '',
         password: ''
     })
+
+    const navigate = useNavigate()
 
     const [login, { loading }] = useMutation(LOGIN, {
         refetchQueries: ['GetAuthenticatedUser'],
