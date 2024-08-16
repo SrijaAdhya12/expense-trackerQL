@@ -58,7 +58,7 @@ await server.start()
 const whitelist = ['http://localhost:5173', process.env.PRODUCTION_URL]
 app.use(
     cors({
-        origin: function (origin, callback) {
+        origin: (origin, callback) => {
             if (whitelist.indexOf(origin) !== -1) {
                 callback(null, true)
             } else {

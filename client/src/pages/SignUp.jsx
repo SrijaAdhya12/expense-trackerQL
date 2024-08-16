@@ -112,8 +112,9 @@ const SignUpPage = () => {
                             <p>
                                 Already have an account?{' '}
                                 <Link to="/login" className="text-black hover:underline">
-                                    Login here
-                                </Link>
+                                    Login
+                                </Link>{' '}
+                                here
                             </p>
                         </div>
                     </div>
