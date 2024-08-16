@@ -58,7 +58,7 @@ const server = new ApolloServer({
 await server.start()
 
 app.use(
-    '/graphql',
+    '/',
     cors({
         // origin: (origin, callback) => {
         //     callback(null, origin)
@@ -72,7 +72,7 @@ app.use(
     })
 )
 
-app.get('/', (_, res) => res.send('Welcome to ApolloServer'))
+app.get('/test', (_, res) => res.send('Welcome to ApolloServer'))
 
 // Modified server startup
 await new Promise((resolve) => httpServer.listen({ port: process.env.PORT }, resolve))
