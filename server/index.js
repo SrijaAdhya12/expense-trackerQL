@@ -55,7 +55,7 @@ const server = new ApolloServer({
 
 // Ensure we wait for our server to start
 await server.start()
-const whitelist = ['http://localhost:5000', process.env.PRODUCTION_URL]
+const whitelist = ['http://localhost:5173', process.env.PRODUCTION_URL]
 app.use(
     cors({
         origin: function (origin, callback) {
