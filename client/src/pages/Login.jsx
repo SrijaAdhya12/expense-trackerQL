@@ -15,8 +15,13 @@ const LoginPage = () => {
 
     const [login, { loading }] = useMutation(LOGIN, {
         refetchQueries: ['GetAuthenticatedUser'],
-        onCompleted: () => {
+        onCompleted: (data) => {
+            console.log('Mutation Completed:', data) 
             navigate('/')
+        },
+        onError: (error) => {
+            console.error('Mutation Error:', error) 
+            toast.error(error.message)
         }
     })
 
