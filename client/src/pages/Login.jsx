@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import InputField from '../components/InputField'
+import { InputField } from '../components'
 import { useMutation } from '@apollo/client'
 import { LOGIN } from '../graphql/mutations/user.mutation'
 import toast from 'react-hot-toast'
@@ -16,11 +16,11 @@ const LoginPage = () => {
     const [login, { loading }] = useMutation(LOGIN, {
         refetchQueries: ['GetAuthenticatedUser'],
         onCompleted: (data) => {
-            console.log('Mutation Completed:', data) 
+            console.log('Mutation Completed:', data)
             navigate('/')
         },
         onError: (error) => {
-            console.error('Mutation Error:', error) 
+            console.error('Mutation Error:', error)
             toast.error(error.message)
         }
     })
