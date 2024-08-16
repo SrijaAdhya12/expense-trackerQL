@@ -1,10 +1,11 @@
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
-import { BrowserRouter } from 'react-router-dom'
-import './index.css'
 import { GridBackground } from './components'
+import { BrowserRouter } from 'react-router-dom'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+
+import App from './App'
+import './index.css'
 
 const client = new ApolloClient({
     uri: import.meta.env.VITE_API,

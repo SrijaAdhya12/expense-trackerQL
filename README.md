@@ -1,16 +1,16 @@
     updated on: 16th August 2024, Friday
 
 <div align=center>
-    <a href="https://github.com/SrijaAdhya12/expense-trackerQL-kit">
-        <img width="200" src="https://cdn-icons-png.flaticon.com/512/6289/6289296.png" alt="SrijaAdhya12/expense-trackerQL-kit">
+    <a href="https://github.com/SrijaAdhya12/expense-trackerQL">
+        <img width="200" src="https://cdn-icons-png.flaticon.com/512/6289/6289296.png" alt="expense-trackerQL">
     </a>
     <p style="font-family: roboto, calibri; font-size:12pt; font-style:italic"> A web app based on MERN and GraphQL to keep track on daily expense, investment and saving </p>
-    <a src="https://github.com/SrijaAdhya12/expense-trackerQL-kit/forks">
+    <a src="https://github.com/SrijaAdhya12/expense-trackerQL/forks">
         <img alt="GitHub forks" src="https://img.shields.io/github/forks/SrijaAdhya12/expense-trackerQL">
     </a>
 </div>
 
-# [Expense-TrackerQL](https://github.com/SrijaAdhya12/expense-trackerQL-kit)
+# [Expense-TrackerQL](https://github.com/SrijaAdhya12/expense-trackerQL)
 
 ![line]
 
@@ -106,6 +106,6 @@ $> npm start   # run the backEnd
 
 [markdown badges]: https://github.com/Ileriayo/markdown-badges
 [line]: https://user-images.githubusercontent.com/75939390/137615281-3a875960-92cc-407f-97fe-fd2319bdb252.png
-[License]: https://github.com/SrijaAdhya12/expense-trackerQL-kit/blob/main/LICENSE
+[License]: https://github.com/SrijaAdhya12/expense-trackerQL/blob/main/LICENSE
 
 <!-- 16/08/24 -->

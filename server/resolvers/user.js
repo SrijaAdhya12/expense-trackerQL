@@ -1,4 +1,4 @@
-import User from '../models/users.js'
+import User from '../models/user.js'
 import bcrypt from 'bcryptjs'
 
 const userResolver = {
@@ -9,24 +9,25 @@ const userResolver = {
                 if (!username || !name || !password || !gender) {
                     throw new Error('All fields are required')
                 }
-                const existingUser = await User.findOne({ username })
-                if (existingUser) {
+                if (await User.findOne({ username })) {
                     throw new Error('User already exits')
                 }
-
+                const profilePic = {
+                    male: `https://avatar.iran.liara.run/public/boy?username=${username}`,
+                    female: `https://avatar.iran.liara.run/public/girl?username=${username}`,
+                    default: `https://avatar.iran.liara.run/public/?username=${username}`
+                }
                 const salt = await bcrypt.genSalt(10)
                 const hashedPassword = await bcrypt.hash(password, salt)
 
                 // https://avatar-placeholder.iran.liara.run/
 
-                const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`
-                const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`
                 const newUser = new User({
                     username,
                     name,
                     password: hashedPassword,
                     gender,
-                    profilePicture: gender === 'male' ? boyProfilePic : girlProfilePic
+                    profilePicture: profilePic[gender] ?? profilePic.default
                 })
                 await newUser.save()
                 await context.login(newUser)
@@ -39,7 +40,9 @@ const userResolver = {
         login: async (_, { input }, context) => {
             try {
                 const { username, password } = input
-                if (!username || !password) throw new Error('All fields are required')
+                if (!username || !password) {
+                    throw new Error('All fields are required')
+                }
                 const { user } = await context.authenticate('graphql-local', { username, password })
 
                 await context.login(user)
@@ -75,8 +78,7 @@ const userResolver = {
         },
         user: async (_, { userId }) => {
             try {
-                const user = await User.findById(userId)
-                return user
+                return await User.findById(userId)
             } catch (error) {
                 console.error('Error in user query', error)
                 throw new Error(error.message || 'Error getting user')

@@ -7,7 +7,6 @@ const Cards = () => {
     const { data, loading } = useQuery(GET_TRANSACTIONS)
     const { data: authUser } = useQuery(GET_AUTHENTICATED_USER)
     
-    console.log("cards:" ,data)
     return (
         <div className="w-full px-10 min-h-[40vh]">
             <p className="text-5xl font-bold text-center my-10">History</p>
