@@ -63,7 +63,7 @@ app.use(
         // origin: (origin, callback) => {
         //     callback(null, origin)
         // },
-        origin: 'https://expense-tracker-ql-c266.vercel.app/',
+        origin: 'https://expense-tracker-ql-c266.vercel.app',
         credentials: true
     }),
     express.json(),
