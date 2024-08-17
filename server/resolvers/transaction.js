@@ -1,4 +1,5 @@
 import Transaction from '../models/transaction.js'
+
 const transactionResolver = {
     Query: {
         transactions: async (_, __, context) => {
@@ -7,8 +8,7 @@ const transactionResolver = {
                     throw new Error('Unauthorized')
                 }
                 const userId = await context.getUser().id
-                const transactions = await Transaction.find({ userId })
-                return transactions
+                return await Transaction.find({ userId })
             } catch (error) {
                 console.error('Error getting transactions', error)
                 throw new Error('Error getting transactions')
@@ -16,15 +16,16 @@ const transactionResolver = {
         },
         transaction: async (_, { transactionId }) => {
             try {
-                const transaction = await Transaction.findById(transactionId)
-                return transaction
+                return await Transaction.findById(transactionId)
             } catch (error) {
                 console.error('Error getting transaction', error)
                 throw new Error('Error getting transaction')
             }
         },
         categoryStatistics: async (_, __, context) => {
-            if (!context.getUser()) throw new Error('Unauthorized')
+            if (!context.getUser()) {
+                throw new Error('Unauthorized')
+            }
 
             const userId = context.getUser()._id
             const transactions = await Transaction.find({ userId })
@@ -65,8 +66,7 @@ const transactionResolver = {
         },
         deleteTransaction: async (_, { transactionId }) => {
             try {
-                const deletedTransaction = await Transaction.findByIdAndDelete(transactionId)
-                return deletedTransaction
+                return await Transaction.findByIdAndDelete(transactionId)
             } catch (err) {
                 console.error('Error deleting transaction:', err)
                 throw new Error('Error deleting transaction')
