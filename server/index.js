@@ -40,10 +40,11 @@ app.use(
 			httpOnly: true, // this option prevents the Cross-Site Scripting (XSS) attacks
 		},
 		store: store,
-    }),
-    passport.initialize(),
-    passport.session()
+    })
 )
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 const server = new ApolloServer({
     typeDefs: mergedTypeDefs,
