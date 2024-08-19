@@ -55,11 +55,18 @@ const server = new ApolloServer({
 await server.start()
 const allowedOrigin = process.env.PRODUCTION_URL
 app.use(
-        cors({
-                origin: allowedOrigin,
-                credentials: true
-        })
-)
+	"/",
+	cors({
+		origin: allowedOrigin,
+		credentials: true,
+	}),
+	express.json(),
+	// expressMiddleware accepts the same arguments:
+	// an Apollo Server instance and optional configuration options
+	expressMiddleware(server, {
+		context: async ({ req, res }) => buildContext({ req, res }),
+	})
+);
 app.get('/test', (_, res) => res.send('Welcome to ApolloServer'))
 mongoose
     .connect(process.env.MONGO_URI)
