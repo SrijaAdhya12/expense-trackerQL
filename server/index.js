@@ -30,19 +30,21 @@ const store = new MongoDBstore({
 
 store.on('error', (err) => console.error(err))
 
+
 app.use(
     session({
-                secret: process.env.SESSION_SECRET,
-                resave: false,
-                saveUninitialized: true,
-                cookie: {
-			secure: true,
-			httpOnly: false,
-                        maxAge: 1000 * 60 * 60 * 24 * 7
-                },
-                store: store 
+        secret: process.env.SESSION_SECRET,
+        resave: false, 
+        saveUninitialized: false,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24 * 7,
+            httpOnly: false
+        },
+        store: store
     })
 )
+
+
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -63,8 +65,6 @@ app.use(
 		credentials: true,
 	}),
 	express.json(),
-	// expressMiddleware accepts the same arguments:
-	// an Apollo Server instance and optional configuration options
 	expressMiddleware(server, {
 		context: async ({ req, res }) => buildContext({ req, res }),
 	})
