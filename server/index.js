@@ -53,22 +53,12 @@ const server = new ApolloServer({
 
 // Ensure we wait for our server to start
 await server.start()
-const whitelist = ['http://localhost:5173', process.env.PRODUCTION_URL]
+const allowedOrigin = process.env.PRODUCTION_URL
 app.use(
-    cors({
-        origin: (origin, callback) => {
-            if (whitelist.indexOf(origin) !== -1) {
-                callback(null, true)
-            } else {
-                callback(new Error('Not allowed by CORS'))
-            }
-        },
-        credentials: true
-    }),
-    express.json(),
-    expressMiddleware(server, {
-        context: async ({ req, res }) => buildContext({ req, res })
-    })
+        cors({
+                origin: allowedOrigin,
+                credentials: true
+        })
 )
 app.get('/test', (_, res) => res.send('Welcome to ApolloServer'))
 mongoose
