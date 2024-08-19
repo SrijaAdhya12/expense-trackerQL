@@ -55,7 +55,7 @@ const server = new ApolloServer({
 await server.start()
 const allowedOrigin = process.env.PRODUCTION_URL
 app.use(
-	"/",
+	"/graphql",
 	cors({
 		origin: allowedOrigin,
 		credentials: true,
