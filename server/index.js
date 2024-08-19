@@ -25,7 +25,7 @@ const httpServer = http.createServer(app)
 const MongoDBstore = connectMongo(session)
 const store = new MongoDBstore({
     uri: process.env.MONGO_URI,
-    collection: 'sessions'
+    collection: 'session'
 })
 
 store.on('error', (err) => console.error(err))
