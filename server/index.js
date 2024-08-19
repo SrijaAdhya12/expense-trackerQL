@@ -32,17 +32,14 @@ store.on('error', (err) => console.error(err))
 
 app.use(
     session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            maxAge: 1000 * 60 * 60 * 24 * 7,
-            httpOnly: true
-            // secure: process.env.NODE_ENV === 'production',
-            // sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-            // proxy: process.env.NODE_ENV === 'production'
-        },
-        store: store
+                secret: process.env.SECRET,
+                resave: false,
+                saveUninitialized: true,
+                cookie: {
+                     secure: false,
+                     maxAge: 1000 * 60 * 60 * 24 * 7
+                },
+                store: store
     }),
     passport.initialize(),
     passport.session()
