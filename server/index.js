@@ -8,7 +8,6 @@ import connectMongo from 'connect-mongodb-session'
 
 import { ApolloServer } from '@apollo/server'
 import { expressMiddleware } from '@apollo/server/express4'
-import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
 
 import { buildContext } from 'graphql-passport'
 
@@ -20,7 +19,6 @@ import { configurePassport } from './passport/index.js'
 
 configurePassport()
 dotenv.config()
-
 
 const app = express()
 
@@ -53,7 +51,7 @@ app.use(passport.session())
 
 const server = new ApolloServer({
     typeDefs: mergedTypeDefs,
-    resolvers: mergedResolvers,
+    resolvers: mergedResolvers
 })
 
 // Ensure we wait for our server to start
@@ -76,7 +74,6 @@ app.use(
 )
 
 // npm run build will build your frontend app, and it will the optimized version of your app
-
 
 // Modified server startup
 await new Promise((resolve) => httpServer.listen({ port: PORT }, resolve))
