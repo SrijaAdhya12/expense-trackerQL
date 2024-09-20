@@ -1,15 +1,18 @@
-import { AppRouter, GridBackground, Header } from './components'
-import { useQuery } from '@apollo/client'
+import { AppRouter, } from './components'
+import Header from './components/ui/Header'
+import GridBackground from './components/ui/GridBackground'
 import { GET_AUTHENTICATED_USER } from './graphql/queries/user.query'
 import { Toaster } from 'react-hot-toast'
 
-const App = () => {
+import { BrowserRouter } from 'react-router-dom'
+import { ApolloClient, InMemoryCache, ApolloProvider, useQuery } from '@apollo/client'
+
+const ExpenseTrackerQL = () => {
     const { loading, data, error } = useQuery(GET_AUTHENTICATED_USER)
 
     if (!data || error) {
-        return null
+        return error && console.error(error)
     }
-
     return (
         !loading && (
             <GridBackground>
@@ -18,6 +21,21 @@ const App = () => {
                 <Toaster />
             </GridBackground>
         )
+    )
+}
+
+const App = () => {
+    const client = new ApolloClient({
+        uri: 'http://localhost:5000/graphql',
+        cache: new InMemoryCache(),
+        credentials: 'include'
+    })
+    return (
+        <BrowserRouter>
+            <ApolloProvider client={client}>
+                <ExpenseTrackerQL />
+            </ApolloProvider>
+        </BrowserRouter>
     )
 }
 

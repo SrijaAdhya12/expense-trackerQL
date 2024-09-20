@@ -5,10 +5,10 @@ import { FaSackDollar } from 'react-icons/fa6'
 import { FaTrash } from 'react-icons/fa'
 import { HiPencilAlt } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
-import { formatDate } from '../../utils/formatDate'
+import { formatDate } from '../utils/formatDate'
 import toast from 'react-hot-toast'
 import { useMutation } from '@apollo/client'
-import { DELETE_TRANSACTION } from '../../graphql/mutations/transaction.mutation'
+import { DELETE_TRANSACTION } from '../graphql/mutations/transaction.mutation'
 
 const categoryColorMap = {
     saving: 'from-green-700 to-green-400',
