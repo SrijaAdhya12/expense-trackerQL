@@ -5,15 +5,11 @@ import dotenv from 'dotenv'
 import passport from 'passport'
 import session from 'express-session'
 import connectMongo from 'connect-mongodb-session'
-
-import { ApolloServer } from '@apollo/server'
-import { expressMiddleware } from '@apollo/server/express4'
-
-import { buildContext } from 'graphql-passport'
-
 import mergedResolvers from './resolvers/index.js'
 import mergedTypeDefs from './typeDefs/index.js'
-
+import { ApolloServer } from '@apollo/server'
+import { expressMiddleware } from '@apollo/server/express4'
+import { buildContext } from 'graphql-passport'
 import { connectDB } from './db/connectDB.js'
 import { configurePassport } from './passport/index.js'
 
@@ -21,18 +17,13 @@ configurePassport()
 dotenv.config()
 
 const app = express()
-
+const MongoDBStore = connectMongo(session)
 const httpServer = http.createServer(app)
 const PORT = process.env.PORT
-const MongoDBStore = connectMongo(session)
-
-const store = new MongoDBStore({
-    uri: process.env.MONGO_URI,
-    collection: 'sessions'
+const server = new ApolloServer({
+    typeDefs: mergedTypeDefs,
+    resolvers: mergedResolvers
 })
-
-store.on('error', (err) => console.log(err))
-
 app.use(
     session({
         secret: process.env.SESSION_SECRET,
@@ -42,17 +33,16 @@ app.use(
             maxAge: 1000 * 60 * 60 * 24 * 7,
             httpOnly: true // this option prevents the Cross-Site Scripting (XSS) attacks
         },
-        store: store
-    })
+        store: new MongoDBStore({
+            uri: process.env.MONGO_URI,
+            collection: 'sessions'
+        })
+    }),
+    passport.initialize(),
+    passport.session()
 )
 
-app.use(passport.initialize())
-app.use(passport.session())
 
-const server = new ApolloServer({
-    typeDefs: mergedTypeDefs,
-    resolvers: mergedResolvers
-})
 
 // Ensure we wait for our server to start
 await server.start()
