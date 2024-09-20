@@ -1,42 +1,54 @@
-import Transaction from '../models/transaction.js'
+import { Transactions as Transaction, Users as User } from '../models/index.js'
 
 const transactionResolver = {
     Query: {
         transactions: async (_, __, context) => {
             try {
-                if (!context.getUser()) {
-                    throw new Error('Unauthorized')
-                }
-                const userId = await context.getUser().id
-                return await Transaction.find({ userId })
-            } catch (error) {
-                console.error('Error getting transactions', error)
+                if (!context.getUser()) throw new Error('Unauthorized')
+                const userId = await context.getUser()._id
+
+                const transactions = await Transaction.find({ userId })
+                return transactions
+            } catch (err) {
+                console.error('Error getting transactions:', err)
                 throw new Error('Error getting transactions')
             }
         },
         transaction: async (_, { transactionId }) => {
             try {
-                return await Transaction.findById(transactionId)
-            } catch (error) {
-                console.error('Error getting transaction', error)
+                const transaction = await Transaction.findById(transactionId)
+                return transaction
+            } catch (err) {
+                console.error('Error getting transaction:', err)
                 throw new Error('Error getting transaction')
             }
         },
         categoryStatistics: async (_, __, context) => {
-            if (!context.getUser()) {
-                throw new Error('Unauthorized')
-            }
+            if (!context.getUser()) throw new Error('Unauthorized')
 
             const userId = context.getUser()._id
             const transactions = await Transaction.find({ userId })
             const categoryMap = {}
+
+            // const transactions = [
+            // 	{ category: "expense", amount: 50 },
+            // 	{ category: "expense", amount: 75 },
+            // 	{ category: "investment", amount: 100 },
+            // 	{ category: "saving", amount: 30 },
+            // 	{ category: "saving", amount: 20 }
+            // ];
+
             transactions.forEach((transaction) => {
                 if (!categoryMap[transaction.category]) {
                     categoryMap[transaction.category] = 0
                 }
                 categoryMap[transaction.category] += transaction.amount
             })
+
+            // categoryMap = { expense: 125, investment: 100, saving: 50 }
+
             return Object.entries(categoryMap).map(([category, totalAmount]) => ({ category, totalAmount }))
+            // return [ { category: "expense", totalAmount: 125 }, { category: "investment", totalAmount: 100 }, { category: "saving", totalAmount: 50 } ]
         }
     },
     Mutation: {
@@ -59,17 +71,30 @@ const transactionResolver = {
                     new: true
                 })
                 return updatedTransaction
-            } catch (error) {
-                console.error('Error updating transaction', error)
+            } catch (err) {
+                console.error('Error updating transaction:', err)
                 throw new Error('Error updating transaction')
             }
         },
         deleteTransaction: async (_, { transactionId }) => {
             try {
-                return await Transaction.findByIdAndDelete(transactionId)
+                const deletedTransaction = await Transaction.findByIdAndDelete(transactionId)
+                return deletedTransaction
             } catch (err) {
                 console.error('Error deleting transaction:', err)
                 throw new Error('Error deleting transaction')
+            }
+        }
+    },
+    Transaction: {
+        user: async (parent) => {
+            const userId = parent.userId
+            try {
+                const user = await User.findById(userId)
+                return user
+            } catch (err) {
+                console.error('Error getting user:', err)
+                throw new Error('Error getting user')
             }
         }
     }

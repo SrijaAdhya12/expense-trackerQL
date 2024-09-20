@@ -4,9 +4,7 @@ import { GET_AUTHENTICATED_USER } from '../graphql/queries/user.query'
 
 const Private = ({ component }) => {
     const {
-        loading,
-        data: { authUser },
-        error
+        data: { authUser }
     } = useQuery(GET_AUTHENTICATED_USER)
 
     return authUser ? component : <Navigate to="/login" />

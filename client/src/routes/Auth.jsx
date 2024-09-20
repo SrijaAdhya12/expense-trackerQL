@@ -4,11 +4,8 @@ import { useQuery } from '@apollo/client'
 
 const Auth = ({ component }) => {
     const {
-        loading,
-        data: { authUser },
-        error
+        data: { authUser }
     } = useQuery(GET_AUTHENTICATED_USER)
-
     return authUser ? <Navigate to="/" /> : component
 }
 
