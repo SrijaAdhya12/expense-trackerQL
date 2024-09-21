@@ -1,4 +1,3 @@
-client / src / components / Loader.jsx
 import { cn } from '@/lib'
 const Loader = ({ className }) => {
     return (
