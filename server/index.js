@@ -31,7 +31,7 @@ app.use(
         saveUninitialized: false, // option specifies whether to save uninitialized sessions
         cookie: {
             maxAge: 1000 * 60 * 60 * 24 * 7,
-            httpOnly: true // this option prevents the Cross-Site Scripting (XSS) attacks
+            // httpOnly: true // this option prevents the Cross-Site Scripting (XSS) attacks
         },
         store: new MongoDBStore({
             uri: process.env.MONGO_URI,
