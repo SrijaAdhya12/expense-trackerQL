@@ -1,19 +1,11 @@
 import { Navigate } from 'react-router-dom'
-import { GET_AUTHENTICATED_USER } from '../graphql/queries/user.query'
-import { useQuery } from '@apollo/client'
-import { Loader } from '@/components'
+import { useAuth } from '@/hooks'
 
 const Private = ({ component }) => {
-    const {
-        data: { authUser },
-        loading
-    } = useQuery(GET_AUTHENTICATED_USER)
+    const { user } = useAuth()
 
-    if (loading) {
-        return <Loader />
-    }
+    return user ? component : <Navigate to="/login" />
 
-    return authUser ? component : <Navigate to="/login" />
 }
 
 export default Private
