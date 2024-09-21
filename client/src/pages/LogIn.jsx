@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { InputField } from '@/components'
 
 const LogIn = () => {
-    const initialState = { username: '', password: '' }
+    const initialState = { useclsrname: '', password: '' }
     const { logIn, loading } = useAuth()
     const [loginData, setLoginData] = useState(initialState)
 
