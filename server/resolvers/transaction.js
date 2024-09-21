@@ -2,11 +2,12 @@ import { Transactions as Transaction, Users as User } from '../models/index.js'
 
 const transactionResolver = {
     Query: {
-        transactions: async (_, __, context) => {
+        transactions: async (_, __, { user }) => {
             try {
-                if (!context.getUser()) throw new Error('Unauthorized')
-                const userId = await context.getUser()._id
-
+                if (!user) {
+                    throw new Error('Unauthorized')
+                }
+                const { _id: userId } = user
                 const transactions = await Transaction.find({ userId })
                 return transactions
             } catch (err) {
@@ -23,10 +24,8 @@ const transactionResolver = {
                 throw new Error('Error getting transaction')
             }
         },
-        categoryStatistics: async (_, __, context) => {
-            if (!context.getUser()) throw new Error('Unauthorized')
-
-            const userId = context.getUser()._id
+        categoryStatistics: async (_, __, { user }) => {
+            const { _id: userId } = user
             const transactions = await Transaction.find({ userId })
             const categoryMap = {}
 
@@ -52,11 +51,11 @@ const transactionResolver = {
         }
     },
     Mutation: {
-        createTransaction: async (_, { input }, context) => {
+        createTransaction: async (_, { input }, { user }) => {
             try {
                 const newTransaction = new Transaction({
                     ...input,
-                    userId: context.getUser()._id
+                    userId: user._id
                 })
                 await newTransaction.save()
                 return newTransaction

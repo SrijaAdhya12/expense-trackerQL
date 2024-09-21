@@ -1,29 +1,13 @@
 import { useState } from 'react'
+import { useAuth } from '@/hooks'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
-import { useMutation } from '@apollo/client'
 import { RadioButton, InputField } from '@/components'
-import { SIGN_UP } from '@/graphql/mutations/user.mutation'
 
 const SignUpPage = () => {
-    const [signUpData, setSignUpData] = useState({
-        name: '',
-        username: '',
-        password: '',
-        gender: ''
-    })
-
-    const [signup, { loading }] = useMutation(SIGN_UP, {
-        refetchQueries: ['GetAuthenticatedUser'],
-        onCompleted: (data) => {
-            console.log('Mutation Completed:', data)
-            
-        },
-        onError: (error) => {
-            console.error('Mutation Error:', error)
-            toast.error(error.message)
-        }
-    })
+    const initialState = { name: '', username: '', password: '', gender: '' }
+    const { signUp, loading } = useAuth()
+    const [signUpData, setSignUpData] = useState(initialState)
 
     const handleChange = (e) => {
         const { name, value, type } = e.target
@@ -43,13 +27,9 @@ const SignUpPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if (!signUpData.name || !signUpData.username || !signUpData.password) {
-            return toast.error('Please fill in all fields')
-        }
         try {
-            await signup({ variables: { input: signUpData } })
+            await signUp(signUpData)
         } catch (error) {
-            console.error('Error signing up:', error)
             toast.error(error.message)
         }
     }
@@ -70,6 +50,7 @@ const SignUpPage = () => {
                                 name="name"
                                 value={signUpData.name}
                                 onChange={handleChange}
+                                required
                             />
                             <InputField
                                 label="Username"
@@ -109,6 +90,7 @@ const SignUpPage = () => {
                             <button
                                 type="submit"
                                 className="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black  focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled={loading}"
+                                disabled={loading}
                             >
                                 {loading ? 'loading...' : 'Sign Up'}
                             </button>

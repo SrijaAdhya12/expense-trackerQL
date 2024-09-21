@@ -1,26 +1,13 @@
 import { useState } from 'react'
+import { useAuth } from '@/hooks'
 import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 import { InputField } from '@/components'
-import { useMutation } from '@apollo/client'
-import { LOGIN } from '@/graphql/mutations/user.mutation'
 
-const LoginPage = () => {
-    const [loginData, setLoginData] = useState({
-        username: '',
-        password: ''
-    })
-
-    const [login, { loading }] = useMutation(LOGIN, {
-        refetchQueries: ['GetAuthenticatedUser'],
-        onCompleted: (data) => {
-            console.log('Mutation Completed:', data)
-        },
-        onError: (error) => {
-            console.error('Mutation Error:', error)
-            toast.error(error.message)
-        }
-    })
+const LogIn = () => {
+    const initialState = { username: '', password: '' }
+    const { logIn, loading } = useAuth()
+    const [loginData, setLoginData] = useState(initialState)
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -32,13 +19,9 @@ const LoginPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if (!loginData.username || !loginData.password) {
-            return toast.error('Please fill in all fields')
-        }
         try {
-            await login({ variables: { input: loginData } })
+            await logIn(loginData)
         } catch (error) {
-            console.error('Error logging in:', error)
             toast.error(error.message)
         }
     }
@@ -93,4 +76,4 @@ const LoginPage = () => {
         </main>
     )
 }
-export default LoginPage
+export default LogIn
