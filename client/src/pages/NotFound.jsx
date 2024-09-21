@@ -1,8 +1,8 @@
-import { NotFoundImg } from '../assets/index'
+import { NotFoundImg } from '@/assets/index'
 
 const NotFound = () => {
     return (
-        <div className=" text-white">
+        <main className=" text-white">
             <div className="flex h-screen">
                 <div className="m-auto text-center">
                     <div>
@@ -19,7 +19,7 @@ const NotFound = () => {
                     </a>
                 </div>
             </div>
-        </div>
+        </main>
     )
 }
 export default NotFound

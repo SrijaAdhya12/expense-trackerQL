@@ -1,26 +1,29 @@
-import { AppRouter } from './components'
-import Header from './components/ui/Header'
-import GridBackground from './components/ui/GridBackground'
-import { GET_AUTHENTICATED_USER } from './graphql/queries/user.query'
-import { Toaster } from 'react-hot-toast'
+import Header from '@/components/ui/Header'
+import GridBackground from '@/components/ui/GridBackground'
+import { Loader, AppRouter } from '@/components'
+import { GET_AUTHENTICATED_USER } from '@/graphql/queries/user.query'
 import { BrowserRouter } from 'react-router-dom'
-import { ApolloClient, InMemoryCache, ApolloProvider, useQuery } from '@apollo/client'
+import { Toaster } from 'react-hot-toast'
+import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, NetworkStatus } from '@apollo/client'
 
 const ExpenseTrackerQL = () => {
-    const { loading, data, error } = useQuery(GET_AUTHENTICATED_USER)
-    if (error) {
-        return error && console.error(error)
+    const { loading, data, error, networkStatus } = useQuery(GET_AUTHENTICATED_USER)
+    console.log(NetworkStatus, networkStatus)
+
+    if (loading) {
+        return <Loader />
     }
-    console.log("loading", loading)
-    console.log(data)
+
+    if (error) {
+        return console.error(error)
+    }
+
     return (
-        !loading && (
-            <GridBackground>
-                {data?.authUser && <Header />}
-                <AppRouter />
-                <Toaster />
-            </GridBackground>
-        )
+        <>
+            {data?.authUser && <Header />}
+            <AppRouter />
+            <Toaster />
+        </>
     )
 }
 
@@ -31,11 +34,13 @@ const App = () => {
         credentials: 'include'
     })
     return (
-        <BrowserRouter>
-            <ApolloProvider client={client}>
-                <ExpenseTrackerQL />
-            </ApolloProvider>
-        </BrowserRouter>
+        <ApolloProvider client={client}>
+            <BrowserRouter>
+                <GridBackground>
+                    <ExpenseTrackerQL />
+                </GridBackground>
+            </BrowserRouter>
+        </ApolloProvider>
     )
 }
 

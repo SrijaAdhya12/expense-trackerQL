@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { RadioButton, InputField } from '../components'
-import { useMutation } from '@apollo/client'
-import { SIGN_UP } from '../graphql/mutations/user.mutation'
 import toast from 'react-hot-toast'
+import { Link } from 'react-router-dom'
+import { useMutation } from '@apollo/client'
+import { RadioButton, InputField } from '@/components'
+import { SIGN_UP } from '@/graphql/mutations/user.mutation'
 
 const SignUpPage = () => {
     const [signUpData, setSignUpData] = useState({
@@ -13,8 +13,16 @@ const SignUpPage = () => {
         gender: ''
     })
 
-    const [signup, { loading, error }] = useMutation(SIGN_UP, {
-        refetchQueries: ['GetAuthenticatedUser']
+    const [signup, { loading }] = useMutation(SIGN_UP, {
+        refetchQueries: ['GetAuthenticatedUser'],
+        onCompleted: (data) => {
+            console.log('Mutation Completed:', data)
+            
+        },
+        onError: (error) => {
+            console.error('Mutation Error:', error)
+            toast.error(error.message)
+        }
     })
 
     const handleChange = (e) => {
@@ -35,22 +43,19 @@ const SignUpPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if (!signUpData.name || !signUpData.username || !signUpData.password)
+        if (!signUpData.name || !signUpData.username || !signUpData.password) {
             return toast.error('Please fill in all fields')
+        }
         try {
-            await signup({
-                variables: {
-                    input: signUpData
-                }
-            })
+            await signup({ variables: { input: signUpData } })
         } catch (error) {
-            console.error('Error:', error)
+            console.error('Error signing up:', error)
             toast.error(error.message)
         }
     }
 
     return (
-        <div className="h-screen flex justify-center items-center">
+        <main className="h-screen flex justify-center items-center">
             <div className="flex rounded-lg overflow-hidden z-50 bg-gray-300">
                 <div className="w-full bg-gray-100 min-w-80 sm:min-w-96 flex items-center justify-center">
                     <div className="max-w-md w-full p-6">
@@ -120,7 +125,7 @@ const SignUpPage = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     )
 }
 

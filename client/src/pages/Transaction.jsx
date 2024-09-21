@@ -1,18 +1,14 @@
-import { useEffect, useState } from 'react'
-import { TransactionFormSkeleton } from '../components'
-import { useParams } from 'react-router-dom'
-import { useMutation, useQuery } from '@apollo/client'
-import { GET_TRANSACTION } from '../graphql/queries/transaction.query'
-import { UPDATE_TRANSACTION } from '../graphql/mutations/transaction.mutation'
 import toast from 'react-hot-toast'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { TransactionFormSkeleton } from '@/components'
+import { useMutation, useQuery } from '@apollo/client'
+import { GET_TRANSACTION } from '@/graphql/queries/transaction.query'
+import { UPDATE_TRANSACTION } from '@/graphql/mutations/transaction.mutation'
 
 const Transaction = () => {
     const { id } = useParams()
-    const { loading, data } = useQuery(GET_TRANSACTION, {
-        variables: { id: id }
-    })
-
-    console.log('Transaction', data)
+    const { loading, data } = useQuery(GET_TRANSACTION, { variables: { id } })
 
     const [updateTransaction, { loading: loadingUpdate }] = useMutation(UPDATE_TRANSACTION, {
         refetchQueries: ['GetTransactions', 'GetTransactionStatistics']
@@ -68,10 +64,12 @@ const Transaction = () => {
         }
     }, [data])
 
-    if (loading) return <TransactionFormSkeleton />
+    if (loading) {
+        return <TransactionFormSkeleton />
+    }
 
     return (
-        <div className="h-screen max-w-4xl mx-auto flex flex-col items-center">
+        <main className="h-full max-w-4xl mx-auto flex flex-col items-center justify-center">
             <p className="md:text-4xl text-2xl lg:text-4xl font-bold text-center relative z-50 mb-4 mr-4 bg-gradient-to-r from-pink-600 via-indigo-500 to-pink-400 inline-block text-transparent bg-clip-text">
                 Update this transaction
             </p>
@@ -227,7 +225,7 @@ const Transaction = () => {
                     {loadingUpdate ? 'Updating...' : 'Update Transaction'}
                 </button>
             </form>
-        </div>
+        </main>
     )
 }
 export default Transaction
