@@ -1,9 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { InputField } from '../components'
-import { useMutation } from '@apollo/client'
-import { LOGIN } from '../graphql/mutations/user.mutation'
 import toast from 'react-hot-toast'
+import { Link } from 'react-router-dom'
+import { InputField } from '@/components'
+import { useMutation } from '@apollo/client'
+import { LOGIN } from '@/graphql/mutations/user.mutation'
 
 const LoginPage = () => {
     const [loginData, setLoginData] = useState({
@@ -11,13 +11,10 @@ const LoginPage = () => {
         password: ''
     })
 
-    const navigate = useNavigate()
-
     const [login, { loading }] = useMutation(LOGIN, {
         refetchQueries: ['GetAuthenticatedUser'],
         onCompleted: (data) => {
             console.log('Mutation Completed:', data)
-            navigate('/')
         },
         onError: (error) => {
             console.error('Mutation Error:', error)
@@ -35,7 +32,9 @@ const LoginPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if (!loginData.username || !loginData.password) return toast.error('Please fill in all fields')
+        if (!loginData.username || !loginData.password) {
+            return toast.error('Please fill in all fields')
+        }
         try {
             await login({ variables: { input: loginData } })
         } catch (error) {
@@ -45,7 +44,7 @@ const LoginPage = () => {
     }
 
     return (
-        <div className="flex justify-center items-center h-screen">
+        <main className="flex justify-center items-center h-screen">
             <div className="flex rounded-lg overflow-hidden z-50 bg-gray-300">
                 <div className="w-full bg-gray-100 min-w-80 sm:min-w-96 flex items-center justify-center">
                     <div className="max-w-md w-full p-6">
@@ -82,7 +81,7 @@ const LoginPage = () => {
                         </form>
                         <div className="mt-4 text-sm text-gray-600 text-center">
                             <p>
-                                {"Don't"} have an account?{' '}
+                                Don&apos;t have an account?{' '}
                                 <Link to="/signup" className="text-black hover:underline">
                                     Sign Up
                                 </Link>
@@ -91,7 +90,7 @@ const LoginPage = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     )
 }
 export default LoginPage

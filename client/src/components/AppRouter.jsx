@@ -1,6 +1,6 @@
+import { AuthRoute, PrivateRoute } from '@/routes'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { Home, Login, SignUp, Transaction, NotFound } from '../pages'
-import { AuthRoute, PrivateRoute } from '../routes'
+import { Home, Login, SignUp, Transaction, NotFound } from '@/pages'
 
 const AppRouter = () => {
     const location = useLocation()

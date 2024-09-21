@@ -1,29 +1,13 @@
-import { Doughnut } from 'react-chartjs-2'
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { TransactionForm, Cards } from '../components'
-import { MdLogout } from 'react-icons/md'
 import toast from 'react-hot-toast'
-import { useMutation, useQuery } from '@apollo/client'
-import { LOGOUT } from '../graphql/mutations/user.mutation'
-import { GET_TRANSACTION_STATISTICS } from '../graphql/queries/transaction.query'
+import { MdLogout } from 'react-icons/md'
+import { Doughnut } from 'react-chartjs-2'
 import { useEffect, useState } from 'react'
-import { GET_AUTHENTICATED_USER } from '../graphql/queries/user.query'
-
-// const chartData = {
-//     labels: ['Saving', 'Expense', 'Investment'],
-//     datasets: [
-//         {
-//             label: '%',
-//             data: [13, 8, 3],
-//             backgroundColor: ['rgba(75, 192, 192)', 'rgba(255, 99, 132)', 'rgba(54, 162, 235)'],
-//             borderColor: ['rgba(75, 192, 192)', 'rgba(255, 99, 132)', 'rgba(54, 162, 235, 1)'],
-//             borderWidth: 1,
-//             borderRadius: 30,
-//             spacing: 10,
-//             cutout: 130
-//         }
-//     ]
-// }
+import { useMutation, useQuery } from '@apollo/client'
+import { TransactionForm, Cards } from '@/components'
+import { LOGOUT } from '@/graphql/mutations/user.mutation'
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { GET_TRANSACTION_STATISTICS } from '@/graphql/queries/transaction.query'
+import { GET_AUTHENTICATED_USER } from '@/graphql/queries/user.query'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -104,9 +88,11 @@ const HomePage = () => {
                     className="w-11 h-11 rounded-full border cursor-pointer"
                     alt="Avatar"
                 />
-                {!loading && <MdLogout className="mx-2 w-5 h-5 cursor-pointer" onClick={handleLogout} />}
-                {/* loading spinner */}
-                {loading && <div className="w-6 h-6 border-t-2 border-b-2 mx-2 rounded-full animate-spin" />}
+                {loading ? (
+                    <div className="w-6 h-6 border-t-2 border-b-2 mx-2 rounded-full animate-spin" />
+                ) : (
+                    <MdLogout className="mx-2 w-5 h-5 cursor-pointer" onClick={handleLogout} />
+                )}
             </div>
             <div className="flex flex-wrap w-full justify-center items-center gap-6">
                 {data?.categoryStatistics.length > 0 && (
