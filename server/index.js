@@ -23,7 +23,11 @@ const server = new ApolloServer({
 })
 server.graphqlPath = '/graphql'
 
-app.use('/graphql', cors(), express.json())
+app.use(
+    '/graphql', //
+    cors(),
+    express.json()
+).get('/', (_, res) => res.send('Hello from expense tracker API'))
 
 async function startServer() {
     await server.start()
