@@ -40,10 +40,6 @@ const Card = ({ transaction , authUser }) => {
         }
     }
 
-
-
-
-
     return (
         <div className={`rounded-md p-4 bg-gradient-to-br ${cardClass}`}>
             <div className="flex flex-col gap-3">

@@ -33,7 +33,8 @@ const server = new ApolloServer({
     resolvers: mergedResolvers,
     context: ({ req, res }) => {
         return buildContext({ req, res, User })
-    }
+    },
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })]
 })
 
 // Ensure we wait for our server to start

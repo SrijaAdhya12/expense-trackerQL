@@ -8,10 +8,11 @@ import { ApolloClient, InMemoryCache, ApolloProvider, useQuery } from '@apollo/c
 
 const ExpenseTrackerQL = () => {
     const { loading, data, error } = useQuery(GET_AUTHENTICATED_USER)
-
-    if (!data || error) {
+    if (error) {
         return error && console.error(error)
     }
+    console.log("loading", loading)
+    console.log(data)
     return (
         !loading && (
             <GridBackground>
