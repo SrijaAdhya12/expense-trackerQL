@@ -26,6 +26,7 @@ const server = new ApolloServer({
 })
 app.use(
     session({
+        name: 'cookie',
         secret: process.env.SESSION_SECRET,
         resave: false, // this option specifies whether to save the session to the store on every request
         saveUninitialized: false, // option specifies whether to save uninitialized sessions
@@ -41,7 +42,9 @@ app.use(
     passport.initialize(),
     passport.session()
 )
-
+if (process.env.NODE_ENV === 'production') {
+    app.set('trust proxy', 1)
+}
 
 
 // Ensure we wait for our server to start

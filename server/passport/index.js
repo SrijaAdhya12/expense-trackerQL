@@ -14,9 +14,10 @@ export const configurePassport = async () => {
         console.log('Deserializing user')
         
         try {
-            User.findById(id)
-                .then((user) => {console.log(user); return done(null, user)})
-                .catch((err) => done(err))
+            console.log('Inside Try')
+            const user = await User.findById(id)
+            console.log('After Try', user)
+            done(null, user)
         } catch (err) {
             console.error('Error deserializing user: ', err)
             done(err)
