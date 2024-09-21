@@ -8,7 +8,7 @@ const transactionResolver = {
                     throw new Error('Unauthorized')
                 }
                 const { _id: userId } = user
-                const transactions = await Transaction.find({ userId })
+                const transactions = await Transaction.find({ userId }).sort({ date: -1 })
                 return transactions
             } catch (err) {
                 console.error('Error getting transactions:', err)

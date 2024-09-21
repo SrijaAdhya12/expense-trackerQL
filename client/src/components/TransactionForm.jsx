@@ -31,10 +31,10 @@ const TransactionForm = () => {
     }
 
     return (
-        <form className="w-full max-w-lg flex flex-col gap-5 px-3" onSubmit={handleSubmit}>
+        <form className="sm:w-full px-5 sm:max-w-lg flex flex-col gap-5 sm:px-3" onSubmit={handleSubmit}>
             {/* TRANSACTION */}
             <div className="flex flex-wrap">
-                <div className="w-full">
+                <div className="sm:w-full w-full">
                     <label
                         className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
                         htmlFor="description"
