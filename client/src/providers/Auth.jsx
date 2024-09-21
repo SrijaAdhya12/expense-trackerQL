@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { AuthContext } from '@/contexts'
 import { useMutation } from '@apollo/client'
 import { LOG_IN, SIGN_UP } from '@/graphql/mutations/user.mutation'

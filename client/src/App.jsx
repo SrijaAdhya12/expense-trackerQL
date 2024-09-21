@@ -1,12 +1,11 @@
 import Header from '@/components/ui/Header'
 import GridBackground from '@/components/ui/GridBackground'
-import { Loader, AppRouter } from '@/components'
-import { GET_AUTHENTICATED_USER } from '@/graphql/queries/user.query'
-import { BrowserRouter } from 'react-router-dom'
+import { AppRouter } from '@/components'
 import { Toaster } from 'react-hot-toast'
+import { AuthProvider } from '@/providers'
+import { BrowserRouter } from 'react-router-dom'
 import { setContext } from '@apollo/client/link/context'
 import { ApolloClient, InMemoryCache, ApolloProvider,  createHttpLink } from '@apollo/client'
-import { AuthProvider } from '@/providers'
 
 const httpLink = createHttpLink({
 

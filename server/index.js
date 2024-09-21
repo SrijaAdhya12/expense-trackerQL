@@ -1,15 +1,13 @@
 import http from 'http'
 import cors from 'cors'
+import dotenv from 'dotenv'
 import express from 'express'
-import jwt from 'jsonwebtoken'
 import mongoose from 'mongoose'
-import { Users } from './models/index.js'
 import { ApolloServer } from '@apollo/server'
-import { mergedTypeDefs } from './typeDefs/index.js'
+import { mergedTypeDefs } from './types/index.js'
 import { mergedResolvers } from './resolvers/index.js'
 import { expressMiddleware } from './middlewares/index.js'
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
-import dotenv from 'dotenv'
 
 dotenv.config()
 
