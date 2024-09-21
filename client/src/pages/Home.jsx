@@ -70,7 +70,7 @@ const Home = () => {
                 <img src={user.profilePicture} className="w-11 h-11 rounded-full border cursor-pointer" alt="Avatar" />
                 <MdLogout className="mx-2 w-5 h-5 cursor-pointer" onClick={handleLogout} />
             </div>
-            <div className="flex flex-wrap w-full justify-center items-center gap-6">
+            <div className="flex flex-wrap w-full justify-center items-center gap-6 ">
                 {data?.categoryStatistics.length > 0 && (
                     <div className="h-[330px] w-[330px] md:h-[360px] md:w-[360px]  ">
                         <Doughnut data={chartData} />
