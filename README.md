@@ -1,4 +1,4 @@
-    updated on: 20th September 2024, Friday
+    updated on: 21st September 2024, Saturday
 
 <div align=center>
     <a href="https://github.com/SrijaAdhya12/expense-trackerQL">
@@ -108,4 +108,4 @@ $> npm start   # run the backEnd
 [line]: https://user-images.githubusercontent.com/75939390/137615281-3a875960-92cc-407f-97fe-fd2319bdb252.png
 [License]: https://github.com/SrijaAdhya12/expense-trackerQL/blob/main/LICENSE
 
-<!-- 20/09/24 -->
+<!-- 21/09/24 -->
