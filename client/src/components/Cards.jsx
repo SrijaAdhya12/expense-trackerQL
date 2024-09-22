@@ -88,7 +88,7 @@ const Cards = () => {
                             onChange={handleSearch}
                         />
                     </div>
-                    <div className="flex ml-4"
+                    <div className="flex ml-6"
                     >
 
                     <button
