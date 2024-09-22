@@ -40,10 +40,10 @@ const Card = ({ transaction, authUser }) => {
 
     return (
         <div className={`rounded-md p-4 bg-gradient-to-br ${cardClass} sm:min-w-96 flex-1 flex flex-grow`}>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 ">
                 <div className="flex flex-row items-center justify-between">
                     <h2 className="text-lg font-bold text-white">{category}</h2>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center sm:ml-60 ml-36  gap-2">
                         {!loading && <FaTrash className={'cursor-pointer'} onClick={handleDelete} />}
                         {loading && <div className="w-6 h-6 border-t-2 border-b-2  rounded-full animate-spin"></div>}
                         <Link to={`/transaction/${transaction._id}`}>

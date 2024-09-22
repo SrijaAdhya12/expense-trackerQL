@@ -52,7 +52,7 @@ const TransactionForm = () => {
                 </div>
             </div>
             {/* PAYMENT TYPE */}
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3">
                 <div className="w-full flex-1 mb-6 md:mb-0">
                     <label
                         className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
