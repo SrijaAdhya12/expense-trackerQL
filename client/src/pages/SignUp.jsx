@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 import { RadioButton, InputField } from '@/components'
 
-const SignUpPage = () => {
+const SignUp = () => {
     const initialState = { name: '', username: '', password: '', gender: '' }
     const { signUp, loading } = useAuth()
     const [signUpData, setSignUpData] = useState(initialState)
@@ -111,4 +111,4 @@ const SignUpPage = () => {
     )
 }
 
-export default SignUpPage
+export default SignUp

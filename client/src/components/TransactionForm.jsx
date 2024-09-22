@@ -1,14 +1,19 @@
 import toast from 'react-hot-toast'
 import { useMutation } from '@apollo/client'
 import { CREATE_TRANSACTION } from '@/graphql/mutations/transaction.mutation'
+import { GET_TRANSACTIONS } from '@/graphql/queries/transaction.query'
 
 const TransactionForm = () => {
-    const [createTransaction, { loading }] = useMutation(CREATE_TRANSACTION, {
+    const [createTransaction, { loading, client }] = useMutation(CREATE_TRANSACTION, {
         refetchQueries: ['GetTransactions', 'GetTransactionStatistics']
     })
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log(formData.get('date'))
+        if (!date) {
+            return toast.error('Please select a date')
+        }
 
         const form = e.target
         const formData = new FormData(form)
@@ -23,6 +28,8 @@ const TransactionForm = () => {
 
         try {
             await createTransaction({ variables: { input: transactionData } })
+            client.cache.readQuery({ query: GET_TRANSACTIONS })
+
             form.reset()
             toast.success('Transaction created successfully')
         } catch (error) {
@@ -31,7 +38,7 @@ const TransactionForm = () => {
     }
 
     return (
-        <form className="flex flex-col gap-5 px-5 sm:w-full sm:max-w-lg sm:px-3" onSubmit={handleSubmit}>
+        <form className="flex w-full flex-col gap-5 px-5 sm:max-w-lg sm:px-3" onSubmit={handleSubmit}>
             {/* TRANSACTION */}
             <div className="flex flex-wrap">
                 <div className="w-full sm:w-full">
@@ -65,6 +72,7 @@ const TransactionForm = () => {
                             className="block w-full appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 pr-8 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                             id="paymentType"
                             name="paymentType"
+                            required
                         >
                             <option value={'card'}>Card</option>
                             <option value={'cash'}>Cash</option>
@@ -94,6 +102,7 @@ const TransactionForm = () => {
                             className="block w-full appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 pr-8 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                             id="category"
                             name="category"
+                            required
                         >
                             <option value={'saving'}>Saving</option>
                             <option value={'expense'}>Expense</option>
@@ -122,7 +131,9 @@ const TransactionForm = () => {
                         id="amount"
                         name="amount"
                         type="number"
+                        required
                         placeholder="150"
+                        min={1}
                     />
                 </div>
             </div>
