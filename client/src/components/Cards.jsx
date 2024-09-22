@@ -117,7 +117,7 @@ const Cards = () => {
                     ))
                 ) : (
                     <div className="col-span-3 row-span-3 flex items-center justify-center min-h-96">
-                        <p className="text-2xl font-bold text-center w-full ">No transaction history found.</p>
+                        <p className="sm:text-2xl text-xl font-bold text-center w-full ">No transaction history found.</p>
                     </div>
                 )}
             </div>
