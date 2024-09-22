@@ -4,22 +4,30 @@ import { GET_TRANSACTIONS } from '@/graphql/queries/transaction.query'
 import { useAuth } from '@/hooks'
 import { useMemo, useState } from 'react'
 import { Loader } from '@/components'
-import { FaSortAlphaDown, FaSortAlphaUp, FaSortNumericDown, FaSortNumericUp, FaUndo } from 'react-icons/fa'
+import {
+    FaLongArrowAltDown,
+    FaLongArrowAltUp,
+    FaRegCalendar,
+    FaSortAlphaDown,
+    FaSortAlphaUp,
+    FaSortNumericDown,
+    FaSortNumericUp,
+    FaUndo
+} from 'react-icons/fa'
+
 const Cards = () => {
     const [isSearching, setIsSearching] = useState(false)
 
-    const searchDelay = () => {
-        return new Promise((resolve) => setTimeout(resolve, 1000))
-    }
+    const searchDelay = () => new Promise((resolve) => setTimeout(resolve, 1000))
 
-    const { data } = useQuery(GET_TRANSACTIONS)
+    const { data, loading } = useQuery(GET_TRANSACTIONS)
     const { user } = useAuth()
     const [sortBy, setSortBy] = useState('date')
     const [sortOrder, setSortOrder] = useState('desc')
     const [searchTerm, setSearchTerm] = useState('')
 
     const sortedAndFilteredTransactions = useMemo(() => {
-        if (!data?.transactions) {
+        if (loading) {
             return []
         }
 
@@ -33,10 +41,7 @@ const Cards = () => {
             )
             .sort((a, b) => {
                 if (sortBy === 'date') {
-                    const dateA = new Date(a.date)
-                    const dateB = new Date(b.date)
-                    // console.log(dateB, dateA)
-                    return sortOrder === 'desc' ? dateB - dateA : dateA - dateB
+                    return sortOrder === 'desc' ? b.date - a.date : a.date - b.date
                 } else if (sortBy === 'amount') {
                     return sortOrder === 'desc' ? b.amount - a.amount : a.amount - b.amount
                 }
@@ -64,26 +69,25 @@ const Cards = () => {
         setSortOrder('desc')
         setSearchTerm('')
     }
+
     return (
-        <div className="sm:w-full sm:px-10 max-w-48 sm:max-w-full">
-            <div className="flex items-center sm:justify-between sm:min-w-[1152px] flex-col sm:flex-row sm:max-w-full my-2 px-10">
-                <p className="sm:text-5xl text-3xl font-bold text-center my-10 sm:ml-[-40px] sm:flex-initial">
-                    History
-                </p>
-                <div className="items-center gap-1 justify-center flex sm:ml-[650px]">
-                    <div className="mx-auto">
+        <div className="w-full max-w-full px-10">
+            <div className="my-2 flex flex-col items-center sm:flex-row sm:justify-between">
+                <h4 className="my-10 text-center text-3xl font-bold sm:flex-initial sm:text-5xl">History</h4>
+                <div className="flex w-full items-center justify-center gap-1 sm:w-auto">
+                    <div className="grow sm:grow-0">
                         <label
-                            className="sm:block uppercase tracking-wide text-white text-xs font-bold mb-2 hidden"
+                            className="mb-2 text-xs font-bold uppercase tracking-wide text-white"
                             htmlFor="description"
                         >
                             Search
                         </label>
                         <input
-                            className="appearance-none block bg-gray-200 h-10 w-[200px] text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 sm:w-80"
+                            className="block h-10 w-full grow appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 transition-all duration-300 ease-in-out placeholder:italic focus:border-gray-500 focus:bg-white focus:outline-none sm:w-72 focus:sm:w-80"
                             id="description"
                             name="description"
                             type="text"
-                            placeholder="Search"
+                            placeholder="Rent"
                             value={searchTerm}
                             onChange={handleSearch}
                         />
@@ -91,27 +95,28 @@ const Cards = () => {
 
                     <button
                         onClick={() => handleSort('date')}
-                        className="size-10 mt-5 rounded-md flex items-center justify-center *:size-5"
+                        className="mt-5 flex size-10 items-center justify-center rounded-md *:size-5"
                     >
-                        {sortBy === 'date' && sortOrder === 'asc' ? <FaSortAlphaDown /> : <FaSortAlphaUp />}
+                        {sortBy === 'date' && sortOrder === 'asc' ? <FaLongArrowAltDown /> : <FaLongArrowAltUp />}
+                        <FaRegCalendar />
                     </button>
                     <button
                         onClick={() => handleSort('amount')}
-                        className="size-10 mt-5 rounded-md flex items-center justify-center *:size-5"
+                        className="mt-5 flex size-10 items-center justify-center rounded-md *:size-5"
                     >
                         {sortBy === 'amount' && sortOrder === 'asc' ? <FaSortNumericDown /> : <FaSortNumericUp />}
                     </button>
                     <button
                         onClick={handleReset}
-                        className="size-10 mt-5 rounded-md flex items-center justify-center *:size-5"
+                        className="mt-5 flex size-10 items-center justify-center rounded-md *:size-5 hover:animate-spin"
                     >
                         <FaUndo />
                     </button>
                 </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-start mx-[-70px] sm:mx-0 mb-20 flex-1 min-w-max md: w-6">
-                {isSearching ? (
-                    <div className="col-span-3 min-h-96 flex items-center justify-center">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {isSearching || loading ? (
+                    <div className="col-span-3 flex min-h-96 items-center justify-center">
                         <Loader />
                     </div>
                 ) : sortedAndFilteredTransactions.length ? (
@@ -119,8 +124,8 @@ const Cards = () => {
                         <Card key={transaction._id} transaction={transaction} authUser={user} />
                     ))
                 ) : (
-                    <div className="col-span-3 row-span-3 flex items-center justify-center min-h-96">
-                        <p className="sm:text-2xl text-xl font-bold text-center w-full ">
+                    <div className="col-span-3 row-span-3 flex min-h-96 items-center justify-center">
+                        <p className="w-full text-center text-xl font-bold sm:text-2xl">
                             No transaction history found.
                         </p>
                     </div>

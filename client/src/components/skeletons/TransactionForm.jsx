@@ -1,21 +1,21 @@
-const TransactionFormSkeleton = () => {
+const TransactionForm = () => {
     return (
-        <div className="h-screen max-w-xl mx-auto py-10">
-            <h3 className="h-6 bg-gray-200 rounded animate-pulse" />
+        <div className="mx-auto h-screen max-w-xl py-10">
+            <h3 className="h-6 animate-pulse rounded bg-gray-200" />
 
             <ul className="mt-5 flex gap-3">
-                <li className="w-full h-6 bg-gray-200 rounded dark:bg-gray-700 animate-pulse" />
-                <li className="w-full h-6 bg-gray-200 rounded dark:bg-gray-700 animate-pulse" />
-                <li className="w-full h-6 bg-gray-200 rounded dark:bg-gray-700 animate-pulse" />
+                <li className="h-6 w-full animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+                <li className="h-6 w-full animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+                <li className="h-6 w-full animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
             </ul>
             <ul className="mt-5 flex gap-3">
-                <li className="w-full h-6 bg-gray-200 rounded dark:bg-gray-700 animate-pulse" />
-                <li className="w-full h-6 bg-gray-200 rounded dark:bg-gray-700 animate-pulse" />
+                <li className="h-6 w-full animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+                <li className="h-6 w-full animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
             </ul>
             <ul className="mt-5 flex gap-3">
-                <li className="w-full h-6 bg-gray-200 rounded dark:bg-gray-700 animate-pulse" />
+                <li className="h-6 w-full animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
             </ul>
         </div>
     )
 }
-export default TransactionFormSkeleton
+export default TransactionForm

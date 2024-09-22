@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { AuthContext } from '@/contexts'
-import { useMutation } from '@apollo/client'
+import { useMutation, useApolloClient } from '@apollo/client'
 import { LOG_IN, SIGN_UP } from '@/graphql/mutations/user.mutation'
 import toast from 'react-hot-toast'
 
@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(false)
     const [logInMutation] = useMutation(LOG_IN)
     const [signUpMutation] = useMutation(SIGN_UP)
+    const client = useApolloClient()
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user')
@@ -20,6 +21,7 @@ const AuthProvider = ({ children }) => {
         } else {
             setUser(null)
             setIsAuthenticated(false)
+            client.cache.reset()
         }
     }, [])
 
@@ -49,7 +51,7 @@ const AuthProvider = ({ children }) => {
             const {
                 data: {
                     signUp: { token, user }
-                },
+                }
             } = await signUpMutation({ variables: { input: userData } })
             localStorage.setItem('user', JSON.stringify(user))
             localStorage.setItem('token', token)
@@ -70,6 +72,7 @@ const AuthProvider = ({ children }) => {
             localStorage.removeItem('token')
             setUser(null)
             setIsAuthenticated(false)
+            client.cache.reset()
             toast.success('Logout successful')
         } catch (error) {
             toast.error(error.message)

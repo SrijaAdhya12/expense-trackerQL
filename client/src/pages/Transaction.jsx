@@ -69,22 +69,22 @@ const Transaction = () => {
     }
 
     return (
-        <main className="h-full max-w-4xl mx-auto flex flex-col items-center justify-center">
-            <p className="md:text-4xl text-2xl lg:text-4xl font-bold text-center relative z-50 mb-4 mr-4 bg-gradient-to-r from-pink-600 via-indigo-500 to-pink-400 inline-block text-transparent bg-clip-text">
+        <main className="mx-auto flex h-full max-w-4xl flex-col items-center justify-center my-20">
+            <p className="relative z-50 mb-4 mr-4 inline-block bg-gradient-to-r from-pink-600 via-indigo-500 to-pink-400 bg-clip-text text-center text-2xl font-bold text-transparent md:text-4xl lg:text-4xl">
                 Update this transaction
             </p>
-            <form className="w-full max-w-lg flex flex-col gap-5 px-3 " onSubmit={handleSubmit}>
+            <form className="flex w-full max-w-lg flex-col gap-5 px-3" onSubmit={handleSubmit}>
                 {/* TRANSACTION */}
                 <div className="flex flex-wrap">
                     <div className="w-full">
                         <label
-                            className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
+                            className="mb-2 block text-xs font-bold uppercase tracking-wide text-white"
                             htmlFor="description"
                         >
                             Transaction
                         </label>
                         <input
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            className="block w-full appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                             id="description"
                             name="description"
                             type="text"
@@ -96,16 +96,16 @@ const Transaction = () => {
                 </div>
                 {/* PAYMENT TYPE */}
                 <div className="flex flex-wrap gap-3">
-                    <div className="w-full flex-1 mb-6 md:mb-0">
+                    <div className="mb-6 w-full flex-1 md:mb-0">
                         <label
-                            className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
+                            className="mb-2 block text-xs font-bold uppercase tracking-wide text-white"
                             htmlFor="paymentType"
                         >
                             Payment Type
                         </label>
                         <div className="relative">
                             <select
-                                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                className="block w-full appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 pr-8 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                                 id="paymentType"
                                 name="paymentType"
                                 onChange={handleInputChange}
@@ -116,7 +116,7 @@ const Transaction = () => {
                             </select>
                             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                 <svg
-                                    className="fill-current h-4 w-4"
+                                    className="h-4 w-4 fill-current"
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                 >
@@ -127,16 +127,16 @@ const Transaction = () => {
                     </div>
 
                     {/* CATEGORY */}
-                    <div className="w-full flex-1 mb-6 md:mb-0">
+                    <div className="mb-6 w-full flex-1 md:mb-0">
                         <label
-                            className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
+                            className="mb-2 block text-xs font-bold uppercase tracking-wide text-white"
                             htmlFor="category"
                         >
                             Category
                         </label>
                         <div className="relative">
                             <select
-                                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                className="block w-full appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 pr-8 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                                 id="category"
                                 name="category"
                                 onChange={handleInputChange}
@@ -145,10 +145,11 @@ const Transaction = () => {
                                 <option value={'saving'}>Saving</option>
                                 <option value={'expense'}>Expense</option>
                                 <option value={'investment'}>Investment</option>
+                                <option value={'miscellaneous'}>Miscellaneous</option>
                             </select>
                             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                 <svg
-                                    className="fill-current h-4 w-4"
+                                    className="h-4 w-4 fill-current"
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                 >
@@ -159,12 +160,12 @@ const Transaction = () => {
                     </div>
 
                     {/* AMOUNT */}
-                    <div className="w-full flex-1 mb-6 md:mb-0">
-                        <label className="block uppercase text-white text-xs font-bold mb-2" htmlFor="amount">
+                    <div className="mb-6 w-full flex-1 md:mb-0">
+                        <label className="mb-2 block text-xs font-bold uppercase text-white" htmlFor="amount">
                             Amount($)
                         </label>
                         <input
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            className="block w-full appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
                             id="amount"
                             name="amount"
                             type="number"
@@ -177,15 +178,15 @@ const Transaction = () => {
 
                 {/* LOCATION */}
                 <div className="flex flex-wrap gap-3">
-                    <div className="w-full flex-1 mb-6 md:mb-0">
+                    <div className="mb-6 w-full flex-1 md:mb-0">
                         <label
-                            className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
+                            className="mb-2 block text-xs font-bold uppercase tracking-wide text-white"
                             htmlFor="location"
                         >
                             Location
                         </label>
                         <input
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                            className="mb-3 block w-full appearance-none rounded border bg-gray-200 px-4 py-3 leading-tight text-gray-700 focus:bg-white focus:outline-none"
                             id="location"
                             name="location"
                             type="text"
@@ -198,7 +199,7 @@ const Transaction = () => {
                     {/* DATE */}
                     <div className="w-full flex-1">
                         <label
-                            className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
+                            className="mb-2 block text-xs font-bold uppercase tracking-wide text-white"
                             htmlFor="date"
                         >
                             Date
@@ -207,8 +208,7 @@ const Transaction = () => {
                             type="date"
                             name="date"
                             id="date"
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-[11px] px-4 mb-3 leading-tight focus:outline-none
-						 focus:bg-white"
+                            className="mb-3 block w-full appearance-none rounded border bg-gray-200 px-4 py-[11px] leading-tight text-gray-700 focus:bg-white focus:outline-none"
                             placeholder="Select date"
                             value={formData.date}
                             onChange={handleInputChange}
@@ -217,8 +217,7 @@ const Transaction = () => {
                 </div>
                 {/* SUBMIT BUTTON */}
                 <button
-                    className="text-white font-bold w-full rounded px-4 py-2 bg-gradient-to-br
-          from-pink-500 to-pink-500 hover:from-pink-600 hover:to-pink-600"
+                    className="w-full rounded bg-gradient-to-br from-pink-500 to-pink-500 px-4 py-2 font-bold text-white hover:from-pink-600 hover:to-pink-600"
                     type="submit"
                     disabled={loadingUpdate}
                 >

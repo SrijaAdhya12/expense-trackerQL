@@ -4,7 +4,6 @@ const transactionResolver = {
     Query: {
         transactions: async (_, __, { user, error }) => {
             try {
-                console.log(user)
                 if (!user) {
                     throw new Error(JSON.stringify(error))
                 }
