@@ -71,7 +71,7 @@ const Cards = () => {
     }
 
     return (
-        <div className="w-full max-w-full px-10">
+        <div className="w-full max-w-full px-5 sm:px-10">
             <div className="my-2 flex flex-col items-center sm:flex-row sm:justify-between">
                 <h4 className="my-10 text-center text-3xl font-bold sm:flex-initial sm:text-5xl">History</h4>
                 <div className="flex w-full items-center justify-center gap-1 sm:w-auto">
@@ -83,7 +83,7 @@ const Cards = () => {
                             Search
                         </label>
                         <input
-                            className="block h-10 w-full grow appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 transition-all duration-300 ease-in-out placeholder:italic focus:border-gray-500 focus:bg-white focus:outline-none sm:w-72 focus:sm:w-80"
+                            className="block h-10 w-full grow appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 transition-all duration-300 ease-in-out focus:border-gray-500 focus:bg-white focus:outline-none sm:w-72 focus:sm:w-80"
                             id="description"
                             name="description"
                             type="text"
@@ -108,7 +108,7 @@ const Cards = () => {
                     </button>
                     <button
                         onClick={handleReset}
-                        className="mt-5 flex size-10 items-center justify-center rounded-md *:size-5 hover:animate-spin"
+                        className="mt-5 flex size-10 items-center justify-center rounded-md *:size-4"
                     >
                         <FaUndo />
                     </button>
