@@ -2,10 +2,10 @@ import { Transactions as Transaction, Users as User } from '../models/index.js'
 
 const transactionResolver = {
     Query: {
-        transactions: async (_, __, { user }) => {
+        transactions: async (_, __, { user, error }) => {
             try {
                 if (!user) {
-                    throw new Error('Unauthorized')
+                    throw new Error(JSON.stringify(error))
                 }
                 const { _id: userId } = user
                 const transactions = await Transaction.find({ userId }).sort({ date: -1 })
@@ -24,7 +24,10 @@ const transactionResolver = {
                 throw new Error('Error getting transaction')
             }
         },
-        categoryStatistics: async (_, __, { user }) => {
+        categoryStatistics: async (_, __, { user, error }) => {
+            if (!user) {
+                throw new Error(JSON.stringify(error))
+            }
             const { _id: userId } = user
             const transactions = await Transaction.find({ userId })
             const categoryMap = {}
