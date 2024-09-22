@@ -65,19 +65,19 @@ const Cards = () => {
         setSearchTerm('')
     }
     return (
-        <div className="sm:w-full sm:px-10 min-h-[40vh] max-w-sm sm:max-w-full">
-            <div className="flex items-center justify-between sm:min-w-[1152px] flex-col sm:flex-row sm:max-w-full my-2 px-10">
+        <div className="sm:w-full sm:px-10 max-w-48 sm:max-w-full">
+            <div className="flex items-center sm:justify-between sm:min-w-[1152px] flex-col sm:flex-row sm:max-w-full my-2 px-10">
                 <p className="text-5xl font-bold text-center my-10 sm:flex-initial">History</p>
                 <div className="items-center gap-1 justify-center flex">
-                    <div className="max-w-sm">
+                    <div className="mx-auto">
                         <label
-                            className="block uppercase tracking-wide text-white text-xs font-bold mb-2"
+                            className="sm:block uppercase tracking-wide text-white text-xs font-bold mb-2 hidden"
                             htmlFor="description"
                         >
                             Search
                         </label>
                         <input
-                            className="appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-80"
+                            className="appearance-none block bg-gray-200 h-10 w-44  text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 sm:w-80"
                             id="description"
                             name="description"
                             type="text"
@@ -106,7 +106,7 @@ const Cards = () => {
                     </button>
                 </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-start mb-20 flex-1 min-w-max">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-start mx-[-50px] sm:mx-0 mb-20 flex-1 min-w-max">
                 {isSearching ? (
                     <div className="col-span-3 min-h-96 flex items-center justify-center">
                         <Loader />
