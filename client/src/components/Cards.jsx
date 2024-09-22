@@ -88,8 +88,6 @@ const Cards = () => {
                             onChange={handleSearch}
                         />
                     </div>
-                    <div className="flex ml-6 sm:ml-3"
-                    >
 
                     <button
                         onClick={() => handleSort('date')}
@@ -109,7 +107,6 @@ const Cards = () => {
                     >
                         <FaUndo />
                     </button>
-                    </div>
                 </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-start mx-[-70px] sm:mx-0 mb-20 flex-1 min-w-max md: w-6">
