@@ -40,11 +40,11 @@ const Card = ({ transaction, authUser }) => {
     }
 
     return (
-        <div className={`rounded-md bg-gradient-to-br p-4 ${cardClass} flex flex-1 flex-grow sm:min-w-96`}>
-            <div className="flex flex-col gap-3">
-                <div className="flex flex-row items-center justify-between">
+        <div className={`rounded-md bg-gradient-to-br p-4 ${cardClass} flex `}>
+            <div className="flex grow flex-col gap-3 ">
+                <div className="flex flex-row items-center justify-between flex-wrap">
                     <h2 className="text-lg font-bold text-white">{category}</h2>
-                    <div className="ml-36 flex items-center gap-2 sm:ml-60">
+                    <div className="flex items-center gap-2">
                         {!loading && <FaTrash className={'cursor-pointer'} onClick={handleDelete} />}
                         {loading && <div className="h-6 w-6 animate-spin rounded-full border-b-2 border-t-2"></div>}
                         <Link to={`/transaction/${transaction._id}`}>

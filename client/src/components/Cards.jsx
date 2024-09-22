@@ -4,7 +4,16 @@ import { GET_TRANSACTIONS } from '@/graphql/queries/transaction.query'
 import { useAuth } from '@/hooks'
 import { useMemo, useState } from 'react'
 import { Loader } from '@/components'
-import { FaSortAlphaDown, FaSortAlphaUp, FaSortNumericDown, FaSortNumericUp, FaUndo } from 'react-icons/fa'
+import {
+    FaLongArrowAltDown,
+    FaLongArrowAltUp,
+    FaRegCalendar,
+    FaSortAlphaDown,
+    FaSortAlphaUp,
+    FaSortNumericDown,
+    FaSortNumericUp,
+    FaUndo
+} from 'react-icons/fa'
 
 const Cards = () => {
     const [isSearching, setIsSearching] = useState(false)
@@ -62,23 +71,23 @@ const Cards = () => {
     }
 
     return (
-        <div className="max-w-48 sm:w-full sm:max-w-full sm:px-10">
+        <div className="w-full max-w-full px-10">
             <div className="my-2 flex flex-col items-center sm:flex-row sm:justify-between">
-                <p className="my-10 text-center text-3xl font-bold sm:flex-initial sm:text-5xl">History</p>
-                <div className="flex items-center justify-center gap-1">
-                    <div className="mx-auto">
+                <h4 className="my-10 text-center text-3xl font-bold sm:flex-initial sm:text-5xl">History</h4>
+                <div className="flex w-full items-center justify-center gap-1 sm:w-auto">
+                    <div className="grow sm:grow-0">
                         <label
-                            className="mb-2 hidden text-xs font-bold uppercase tracking-wide text-white sm:block"
+                            className="mb-2 text-xs font-bold uppercase tracking-wide text-white"
                             htmlFor="description"
                         >
                             Search
                         </label>
                         <input
-                            className="block h-10 w-[200px] appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none sm:w-80"
+                            className="block h-10 w-full grow appearance-none rounded border border-gray-200 bg-gray-200 px-4 py-3 leading-tight text-gray-700 transition-all duration-300 ease-in-out placeholder:italic focus:border-gray-500 focus:bg-white focus:outline-none sm:w-72 focus:sm:w-80"
                             id="description"
                             name="description"
                             type="text"
-                            placeholder="Search"
+                            placeholder="Rent"
                             value={searchTerm}
                             onChange={handleSearch}
                         />
@@ -88,7 +97,8 @@ const Cards = () => {
                         onClick={() => handleSort('date')}
                         className="mt-5 flex size-10 items-center justify-center rounded-md *:size-5"
                     >
-                        {sortBy === 'date' && sortOrder === 'asc' ? <FaSortAlphaDown /> : <FaSortAlphaUp />}
+                        {sortBy === 'date' && sortOrder === 'asc' ? <FaLongArrowAltDown /> : <FaLongArrowAltUp />}
+                        <FaRegCalendar />
                     </button>
                     <button
                         onClick={() => handleSort('amount')}
@@ -98,13 +108,13 @@ const Cards = () => {
                     </button>
                     <button
                         onClick={handleReset}
-                        className="mt-5 flex size-10 items-center justify-center rounded-md *:size-5"
+                        className="mt-5 flex size-10 items-center justify-center rounded-md *:size-5 hover:animate-spin"
                     >
                         <FaUndo />
                     </button>
                 </div>
             </div>
-            <div className="mx-[-70px] mb-20 grid min-w-max flex-1 grid-cols-1 justify-start gap-4 sm:mx-0 md:w-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {isSearching || loading ? (
                     <div className="col-span-3 flex min-h-96 items-center justify-center">
                         <Loader />

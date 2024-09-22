@@ -69,7 +69,7 @@ const Transaction = () => {
     }
 
     return (
-        <main className="mx-auto flex h-full max-w-4xl flex-col items-center justify-center">
+        <main className="mx-auto flex h-full max-w-4xl flex-col items-center justify-center my-20">
             <p className="relative z-50 mb-4 mr-4 inline-block bg-gradient-to-r from-pink-600 via-indigo-500 to-pink-400 bg-clip-text text-center text-2xl font-bold text-transparent md:text-4xl lg:text-4xl">
                 Update this transaction
             </p>
