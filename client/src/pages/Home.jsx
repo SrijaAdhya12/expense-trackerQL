@@ -6,12 +6,32 @@ import { TransactionForm, Cards } from '@/components'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { GET_TRANSACTION_STATISTICS } from '@/graphql/queries/transaction.query'
 import { useAuth } from '@/hooks'
+import toast from 'react-hot-toast'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 const Home = () => {
-    const { data } = useQuery(GET_TRANSACTION_STATISTICS)
     const { user, logOut: handleLogout } = useAuth()
+
+    const { data } = useQuery(GET_TRANSACTION_STATISTICS, {
+        onError: (error) => {
+            error = JSON.parse(error.message)
+            if (error.code === 'JWT_ERROR') {
+                toast.error(() => (
+                    <span className="flex gap-2">
+                        {error.message}. Please Log out and try signing in again.
+                        <button className="ring-1 rounded-sm bg-red-500 text-white p-2" onClick={() => toastDismiss(toast)}>
+                            Logout
+                        </button>
+                    </span>
+                ))
+            }
+        }
+    })
+    const toastDismiss = (toast) => {
+        handleLogout()
+        toast.dismiss()
+    }
     const [chartData, setChartData] = useState({
         labels: [],
 
