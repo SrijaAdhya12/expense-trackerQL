@@ -77,7 +77,7 @@ const Cards = () => {
                             Search
                         </label>
                         <input
-                            className="appearance-none block bg-gray-200 h-10 w-44  text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 sm:w-80"
+                            className="appearance-none block bg-gray-200 h-10 w-52 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 sm:w-80"
                             id="description"
                             name="description"
                             type="text"
