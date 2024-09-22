@@ -40,37 +40,37 @@ const Card = ({ transaction, authUser }) => {
     }
 
     return (
-        <div className={`rounded-md p-4 bg-gradient-to-br ${cardClass} sm:min-w-96 flex-1 flex flex-grow`}>
-            <div className="flex flex-col gap-3 ">
+        <div className={`rounded-md bg-gradient-to-br p-4 ${cardClass} flex flex-1 flex-grow sm:min-w-96`}>
+            <div className="flex flex-col gap-3">
                 <div className="flex flex-row items-center justify-between">
                     <h2 className="text-lg font-bold text-white">{category}</h2>
-                    <div className="flex items-center sm:ml-60 ml-36  gap-2">
+                    <div className="ml-36 flex items-center gap-2 sm:ml-60">
                         {!loading && <FaTrash className={'cursor-pointer'} onClick={handleDelete} />}
-                        {loading && <div className="w-6 h-6 border-t-2 border-b-2  rounded-full animate-spin"></div>}
+                        {loading && <div className="h-6 w-6 animate-spin rounded-full border-b-2 border-t-2"></div>}
                         <Link to={`/transaction/${transaction._id}`}>
                             <HiPencilAlt className="cursor-pointer" size={20} />
                         </Link>
                     </div>
                 </div>
-                <p className="text-white flex items-center gap-1">
+                <p className="flex items-center gap-1 text-white">
                     <BsCardText />
                     Description: {description}
                 </p>
-                <p className="text-white flex items-center gap-1">
+                <p className="flex items-center gap-1 text-white">
                     <MdOutlinePayments />
                     Payment Type: {paymentType}
                 </p>
-                <p className="text-white flex items-center gap-1">
+                <p className="flex items-center gap-1 text-white">
                     <FaSackDollar />
                     Amount: ${amount}
                 </p>
-                <p className="text-white flex items-center gap-1">
+                <p className="flex items-center gap-1 text-white">
                     <FaLocationDot />
                     Location: {location || 'N/A'}
                 </p>
-                <div className="flex justify-between items-center">
-                    <p className="text-xs text-black font-bold">{formattedDate}</p>
-                    <img src={authUser?.profilePicture} className="h-8 w-8 border rounded-full" alt="" />
+                <div className="flex items-center justify-between">
+                    <p className="text-xs font-bold text-black">{formattedDate}</p>
+                    <img src={authUser?.profilePicture} className="h-8 w-8 rounded-full border" alt="" />
                 </div>
             </div>
         </div>

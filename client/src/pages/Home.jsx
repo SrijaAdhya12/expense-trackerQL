@@ -18,7 +18,7 @@ const ErrorToast = ({ message, toast, callback }) => {
     return (
         <span className="flex gap-2">
             {message}
-            <button className="ring-1 rounded-sm bg-red-500 text-white p-2" onClick={() => toastDismiss(toast)}>
+            <button className="rounded-sm bg-red-500 p-2 text-white ring-1" onClick={() => toastDismiss(toast)}>
                 Logout
             </button>
         </span>
@@ -98,17 +98,17 @@ const Home = () => {
         }
     }, [data])
     return (
-        <main className="flex flex-col gap-6 items-center max-w-7xl mx-auto z-20 relative justify-center">
+        <main className="container relative z-20 mx-auto flex flex-col items-center justify-center gap-6">
             <div className="flex items-center">
-                <p className="md:text-4xl text-2xl lg:text-4xl font-bold text-center  relative z-50 mb-4 mr-4 bg-gradient-to-r from-pink-600 via-indigo-500 to-pink-400 inline-block text-transparent bg-clip-text">
+                <p className="relative z-50 mb-4 mr-4 inline-block bg-gradient-to-r from-pink-600 via-indigo-500 to-pink-400 bg-clip-text text-center text-2xl font-bold text-transparent md:text-4xl lg:text-4xl">
                     Spend wisely, track wisely
                 </p>
-                <img src={user.profilePicture} className="w-11 h-11 rounded-full border cursor-pointer" alt="Avatar" />
-                <MdLogout className="mx-2 w-5 h-5 cursor-pointer" onClick={handleLogout} />
+                <img src={user.profilePicture} className="h-11 w-11 cursor-pointer rounded-full border" alt="Avatar" />
+                <MdLogout className="mx-2 h-5 w-5 cursor-pointer" onClick={handleLogout} />
             </div>
-            <div className="flex flex-wrap w-full justify-center items-center gap-6 ">
+            <div className="flex w-full flex-wrap items-center justify-center gap-6">
                 {data?.categoryStatistics.length > 0 && (
-                    <div className="h-[330px] w-[330px] md:h-[360px] md:w-[360px]  ">
+                    <div className="h-[330px] w-[330px] md:h-[360px] md:w-[360px]">
                         <Doughnut data={chartData} />
                     </div>
                 )}
