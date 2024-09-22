@@ -12,14 +12,14 @@ const Cards = () => {
         return new Promise((resolve) => setTimeout(resolve, 1000))
     }
 
-    const { data } = useQuery(GET_TRANSACTIONS)
+    const { data, loading } = useQuery(GET_TRANSACTIONS)
     const { user } = useAuth()
     const [sortBy, setSortBy] = useState('date')
     const [sortOrder, setSortOrder] = useState('desc')
     const [searchTerm, setSearchTerm] = useState('')
 
     const sortedAndFilteredTransactions = useMemo(() => {
-        if (!data?.transactions) {
+        if (loading) {
             return []
         }
 
@@ -33,10 +33,7 @@ const Cards = () => {
             )
             .sort((a, b) => {
                 if (sortBy === 'date') {
-                    const dateA = new Date(a.date)
-                    const dateB = new Date(b.date)
-                    // console.log(dateB, dateA)
-                    return sortOrder === 'desc' ? dateB - dateA : dateA - dateB
+                    return sortOrder === 'desc' ? b.date - a.date : a.date - b.date
                 } else if (sortBy === 'amount') {
                     return sortOrder === 'desc' ? b.amount - a.amount : a.amount - b.amount
                 }
@@ -64,6 +61,7 @@ const Cards = () => {
         setSortOrder('desc')
         setSearchTerm('')
     }
+
     return (
         <div className="sm:w-full sm:px-10 max-w-48 sm:max-w-full">
             <div className="flex items-center sm:justify-between sm:min-w-[1152px] flex-col sm:flex-row sm:max-w-full my-2 px-10">
@@ -107,7 +105,7 @@ const Cards = () => {
                 </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-start mx-[-50px] sm:mx-0 mb-20 flex-1 min-w-max">
-                {isSearching ? (
+                {isSearching || loading ? (
                     <div className="col-span-3 min-h-96 flex items-center justify-center">
                         <Loader />
                     </div>
@@ -117,7 +115,9 @@ const Cards = () => {
                     ))
                 ) : (
                     <div className="col-span-3 row-span-3 flex items-center justify-center min-h-96">
-                        <p className="sm:text-2xl text-xl font-bold text-center w-full ">No transaction history found.</p>
+                        <p className="sm:text-2xl text-xl font-bold text-center w-full ">
+                            No transaction history found.
+                        </p>
                     </div>
                 )}
             </div>

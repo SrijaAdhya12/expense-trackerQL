@@ -10,6 +10,21 @@ import toast from 'react-hot-toast'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
+const ErrorToast = ({ message, toast, callback }) => {
+    const toastDismiss = (toast) => {
+        callback()
+        toast.dismiss()
+    }
+    return (
+        <span className="flex gap-2">
+            {message}
+            <button className="ring-1 rounded-sm bg-red-500 text-white p-2" onClick={() => toastDismiss(toast)}>
+                Logout
+            </button>
+        </span>
+    )
+}
+
 const Home = () => {
     const { user, logOut: handleLogout } = useAuth()
 
@@ -18,20 +33,18 @@ const Home = () => {
             error = JSON.parse(error.message)
             if (error.code === 'JWT_ERROR') {
                 toast.error(() => (
-                    <span className="flex gap-2">
-                        {error.message}. Please Log out and try signing in again.
-                        <button className="ring-1 rounded-sm bg-red-500 text-white p-2" onClick={() => toastDismiss(toast)}>
-                            Logout
-                        </button>
-                    </span>
+                    <ErrorToast
+                        message={`${error.message}. Please Log out and try signing in again.`}
+                        toast={toast}
+                        callback={handleLogout}
+                    />
                 ))
+                return
             }
+            toast.error(error.message)
         }
     })
-    const toastDismiss = (toast) => {
-        handleLogout()
-        toast.dismiss()
-    }
+
     const [chartData, setChartData] = useState({
         labels: [],
 
@@ -65,6 +78,9 @@ const Home = () => {
                 } else if (category === 'investment') {
                     backgroundColors.push('rgba(54, 162, 235)')
                     borderColors.push('rgba(54, 162, 235)')
+                } else if (category === 'miscellaneous') {
+                    backgroundColors.push('rgb(250, 204, 21)')
+                    borderColors.push('rgb(250, 204, 21)')
                 }
             })
 
