@@ -35,7 +35,7 @@ const Cards = () => {
                 if (sortBy === 'date') {
                     const dateA = new Date(a.date)
                     const dateB = new Date(b.date)
-                    console.log(dateB, dateA)
+                    // console.log(dateB, dateA)
                     return sortOrder === 'desc' ? dateB - dateA : dateA - dateB
                 } else if (sortBy === 'amount') {
                     return sortOrder === 'desc' ? b.amount - a.amount : a.amount - b.amount

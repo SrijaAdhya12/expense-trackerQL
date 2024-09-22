@@ -7,7 +7,7 @@ export const expressMiddleware = (server) =>
         context: async ({ req }) => {
             try {
                 const token = req.headers.authorization?.split(' ')[1]
-
+                
                 if (token) {
                     const { id } = jwt.verify(token, process.env.JWT_SECRET)
                     return { user: await Users.findOne({ _id: id }) }

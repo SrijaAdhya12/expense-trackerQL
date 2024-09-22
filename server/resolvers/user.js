@@ -20,20 +20,19 @@ const userResolver = {
                 const hashedPassword = await bcrypt.hash(password, salt)
 
                 // https://avatar-placeholder.iran.liara.run/
-                const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`
-                const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`
-
+                const profilePicture = (username, gender) => {
+                    const genderPath = gender.toLowerCase() === 'male' ? 'boy' : 'girl'
+                    return `https://avatar.iran.liara.run/public/${genderPath}?username=${username}`
+                }
                 const newUser = new User({
                     username,
                     name,
                     password: hashedPassword,
                     gender,
-                    profilePicture: gender === 'male' ? boyProfilePic : girlProfilePic
+                    profilePicture: profilePicture(username, gender)
                 })
-
                 await newUser.save()
-
-                const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, { expiresIn: '3h' })
+                const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '3h' })
                 delete newUser.password
                 return { user: newUser, token }
             } catch (err) {
@@ -89,7 +88,7 @@ const userResolver = {
                 const transactions = await Transaction.find({ userId: parent._id })
                 return transactions
             } catch (err) {
-                console.log('Error in user.transactions resolver: ', err)
+                console.error('Error in user.transactions resolver: ', err)
                 throw new Error(err.message || 'Internal server error')
             }
         }
