@@ -65,8 +65,10 @@ const Cards = () => {
     return (
         <div className="sm:w-full sm:px-10 max-w-48 sm:max-w-full">
             <div className="flex items-center sm:justify-between sm:min-w-[1152px] flex-col sm:flex-row sm:max-w-full my-2 px-10">
-                <p className="text-5xl font-bold text-center my-10 sm:flex-initial">History</p>
-                <div className="items-center gap-1 justify-center flex">
+                <p className="sm:text-5xl text-3xl font-bold text-center my-10 sm:ml-[-40px] sm:flex-initial">
+                    History
+                </p>
+                <div className="items-center gap-1 justify-center flex sm:ml-[650px]">
                     <div className="mx-auto">
                         <label
                             className="sm:block uppercase tracking-wide text-white text-xs font-bold mb-2 hidden"
@@ -75,7 +77,7 @@ const Cards = () => {
                             Search
                         </label>
                         <input
-                            className="appearance-none block bg-gray-200 h-10 w-52 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 sm:w-80"
+                            className="appearance-none block bg-gray-200 h-10 w-[200px] text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 sm:w-80"
                             id="description"
                             name="description"
                             type="text"
@@ -84,6 +86,7 @@ const Cards = () => {
                             onChange={handleSearch}
                         />
                     </div>
+
                     <button
                         onClick={() => handleSort('date')}
                         className="size-10 mt-5 rounded-md flex items-center justify-center *:size-5"
@@ -104,7 +107,7 @@ const Cards = () => {
                     </button>
                 </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-start mx-[-50px] sm:mx-0 mb-20 flex-1 min-w-max">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-start mx-[-70px] sm:mx-0 mb-20 flex-1 min-w-max md:w-6">
                 {isSearching || loading ? (
                     <div className="col-span-3 min-h-96 flex items-center justify-center">
                         <Loader />
