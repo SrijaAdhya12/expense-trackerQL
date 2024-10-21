@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"@apollo/client": "^3.11.8",
-		"chart.js": "^4.4.4",
+		"chart.js": "^4.4.5",
 		"clsx": "^2.1.1",
 		"graphql": "^16.9.0",
 		"mini-svg-data-uri": "^1.4.4",
