@@ -10,29 +10,45 @@ const TransactionForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(formData.get('date'))
+
+        const form = e.target
+        const formData = new FormData(form)
+
+        // Retrieve form values
+        const description = formData.get('description')
+        const paymentType = formData.get('paymentType')
+        const category = formData.get('category')
+        const amount = parseFloat(formData.get('amount'))
+        const location = formData.get('location')
+        const date = formData.get('date') // Get the date value
+
+        // Check if the date is valid
         if (!date) {
             return toast.error('Please select a date')
         }
 
-        const form = e.target
-        const formData = new FormData(form)
+        // Construct the transaction data
         const transactionData = {
-            description: formData.get('description'),
-            paymentType: formData.get('paymentType'),
-            category: formData.get('category'),
-            amount: parseFloat(formData.get('amount')),
-            location: formData.get('location'),
-            date: formData.get('date')
+            description,
+            paymentType,
+            category,
+            amount,
+            location,
+            date
         }
 
         try {
+            // Create the transaction
             await createTransaction({ variables: { input: transactionData } })
+
+            // Refetch transactions and clear cache
             client.cache.readQuery({ query: GET_TRANSACTIONS })
 
+            // Reset form and show success toast
             form.reset()
             toast.success('Transaction created successfully')
         } catch (error) {
+            // Show error message
             toast.error(error.message)
         }
     }
@@ -58,6 +74,7 @@ const TransactionForm = () => {
                     />
                 </div>
             </div>
+
             {/* PAYMENT TYPE */}
             <div className="flex flex-col flex-wrap gap-3 sm:flex-row">
                 <div className="mb-6 w-full flex-1 md:mb-0">
@@ -181,4 +198,5 @@ const TransactionForm = () => {
         </form>
     )
 }
+
 export default TransactionForm
