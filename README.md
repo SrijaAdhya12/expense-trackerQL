@@ -58,16 +58,12 @@ $> npm start   # run the backEnd
 ## Tech Stack Used
 
 -   React js
--   React Router
--   Tailwind
 -   Java Script
 -   Node js
 -   Mongo db
 -   Express js
 -   GraphQL
 -   Apollo GraphQl
--   Github
--   Github Actions
 -   Vercel
 -   Render
 
