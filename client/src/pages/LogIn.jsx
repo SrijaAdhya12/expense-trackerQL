@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '@/hooks'
 import toast from 'react-hot-toast'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { InputField } from '@/components'
 
 const LogIn = () => {

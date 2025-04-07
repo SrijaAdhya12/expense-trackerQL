@@ -3,7 +3,7 @@ import GridBackground from '@/components/ui/GridBackground'
 import { AppRouter } from '@/components'
 import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from '@/providers'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router'
 import { setContext } from '@apollo/client/link/context'
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'
 

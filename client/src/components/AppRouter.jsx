@@ -1,5 +1,5 @@
 import { AuthRoute, PrivateRoute } from '@/routes'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router'
 import { Home, LogIn, SignUp, Transaction, NotFound } from '@/pages'
 
 const AppRouter = () => {

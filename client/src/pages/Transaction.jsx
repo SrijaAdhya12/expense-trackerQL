@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router'
 import { TransactionFormSkeleton } from '@/components'
 import { useMutation, useQuery } from '@apollo/client'
 import { GET_TRANSACTION } from '@/graphql/queries/transaction.query'
