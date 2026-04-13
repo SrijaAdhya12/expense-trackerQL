@@ -15,7 +15,7 @@
 		"clsx": "^2.1.1",
 		"graphql": "^16.13.2",
 		"mini-svg-data-uri": "^1.4.4",
-		"react": "^19.2.4",
+		"react": "^19.2.5",
 		"react-chartjs-2": "^5.3.1",
 		"react-dom": "^19.2.4",
 		"react-hot-toast": "^2.6.0",
